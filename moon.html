@@ -11,7 +11,7 @@
 .profile{width:min(100%,760px);overflow:hidden;border:1px solid #3b3d44;border-radius:12px;background:var(--panel);box-shadow:0 24px 80px #0008}
 .banner{height:190px;position:relative;overflow:hidden;background:linear-gradient(120deg,#252b49,#61416b 48%,#202033)}
 .banner:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#2b2d31 0%,transparent 68%)}
-.banner svg{width:100%;height:100%;display:block}
+.banner img{width:100%;height:100%;display:block;object-fit:cover;object-position:center}
 .content{position:relative;padding:0 25px 25px}.avatar-wrap{width:108px;height:108px;margin-top:-57px;position:relative;z-index:1;border:7px solid var(--panel);border-radius:28%;background:#312233;overflow:hidden}.avatar{width:100%;height:100%;display:block;object-fit:cover}
 .status{position:absolute;right:0;bottom:0;width:23px;height:23px;border:4px solid var(--panel);border-radius:50%;background:#5cba87}
 .identity{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:13px}.name{font-size:25px;letter-spacing:-.7px;font-weight:760}.verified{display:inline-grid;place-items:center;width:19px;height:19px;border-radius:6px;background:#5865f2;color:white;font-size:12px;font-weight:900}.handle{color:var(--muted);margin-top:1px}
@@ -26,14 +26,8 @@
 </head>
 <body>
 <main class="profile" aria-label="Profile card">
-<header class="banner" aria-label="Decorative flower banner">
-<svg viewBox="0 0 610 178" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Cherry blossoms against a dusk sky">
-<defs><linearGradient id="sky" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#241b30"/><stop offset=".55" stop-color="#70415f"/><stop offset="1" stop-color="#b77898"/></linearGradient><radialGradient id="glow"><stop stop-color="#f6d2e4" stop-opacity=".8"/><stop offset="1" stop-color="#f6d2e4" stop-opacity="0"/></radialGradient></defs>
-<rect width="610" height="178" fill="url(#sky)"/><circle cx="435" cy="35" r="100" fill="url(#glow)"/>
-<g fill="none" stroke="#291b30" stroke-width="4" stroke-linecap="round"><path d="M-20 155Q90 100 165 28M42 178Q115 126 142 83M160 87Q205 79 238 42M470 180Q505 111 620 67M518 136Q470 97 462 63"/></g>
-<g fill="#f4c7dd" opacity=".95"><g transform="translate(140 48)"><ellipse cy="-8" rx="7" ry="12"/><ellipse cx="8" cy="-2" rx="7" ry="12" transform="rotate(72 8 -2)"/><ellipse cx="5" cy="8" rx="7" ry="12" transform="rotate(144 5 8)"/><ellipse cx="-5" cy="8" rx="7" ry="12" transform="rotate(216 -5 8)"/><ellipse cx="-8" cy="-2" rx="7" ry="12" transform="rotate(288 -8 -2)"/><circle r="4" fill="#a85e85"/></g><g transform="translate(211 32) scale(.72)"><ellipse cy="-8" rx="7" ry="12"/><ellipse cx="8" cy="-2" rx="7" ry="12" transform="rotate(72 8 -2)"/><ellipse cx="5" cy="8" rx="7" ry="12" transform="rotate(144 5 8)"/><ellipse cx="-5" cy="8" rx="7" ry="12" transform="rotate(216 -5 8)"/><ellipse cx="-8" cy="-2" rx="7" ry="12" transform="rotate(288 -8 -2)"/><circle r="4" fill="#a85e85"/></g><g transform="translate(490 71) scale(.8)"><ellipse cy="-8" rx="7" ry="12"/><ellipse cx="8" cy="-2" rx="7" ry="12" transform="rotate(72 8 -2)"/><ellipse cx="5" cy="8" rx="7" ry="12" transform="rotate(144 5 8)"/><ellipse cx="-5" cy="8" rx="7" ry="12" transform="rotate(216 -5 8)"/><ellipse cx="-8" cy="-2" rx="7" ry="12" transform="rotate(288 -8 -2)"/><circle r="4" fill="#a85e85"/></g><g transform="translate(555 45) scale(.55)"><ellipse cy="-8" rx="7" ry="12"/><ellipse cx="8" cy="-2" rx="7" ry="12" transform="rotate(72 8 -2)"/><ellipse cx="5" cy="8" rx="7" ry="12" transform="rotate(144 5 8)"/><ellipse cx="-5" cy="8" rx="7" ry="12" transform="rotate(216 -5 8)"/><ellipse cx="-8" cy="-2" rx="7" ry="12" transform="rotate(288 -8 -2)"/><circle r="4" fill="#a85e85"/></g></g>
-<g fill="#f5d6e6" opacity=".8"><circle cx="72" cy="36" r="2"/><circle cx="325" cy="24" r="2"/><circle cx="375" cy="65" r="1.5"/><circle cx="280" cy="90" r="2"/><circle cx="585" cy="115" r="2"/><circle cx="350" cy="120" r="1.5"/></g>
-</svg>
+<header class="banner" aria-label="Moon profile header">
+<img src="https://raw.githubusercontent.com/dhisjwhd-svg/lumio-assets/main/images/93BB8D2D-8256-4AD7-835A-8F544F1A614E.png" alt="Pink Kirby-inspired Moon banner" fetchpriority="high">
 </header>
 <div class="content">
 <div class="avatar-wrap">
