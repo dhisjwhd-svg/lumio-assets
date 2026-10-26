@@ -6464,10 +6464,17 @@ function steamStripAdsFromHtml(ghtml, baseHref){
   h = h.replace(/<iframe\b[^>]*(?:doubleclick|googlesyndication|adservice|amazon-adsystem)[^>]*>[\s\S]*?<\/iframe>/gi, '');
 
   var inject = steamAdBlockInject();
-  var baseTag = baseHref ? ('<base href="' + baseHref + '">') : '';
+  var baseTag = baseHref ? ('<base href="' + baseHref.replace(/"/g, '&quot;') + '">') : '';
+
+  // The game catalogue is hosted as individual HTML files. Always anchor relative
+  // scripts, images, audio, and asset paths to that game's actual folder, even when
+  // its source HTML already contains a stale or root-relative <base> tag.
+  if(baseHref && /<base\b[^>]*>/i.test(h)){
+    h = h.replace(/<base\b[^>]*>/i, baseTag);
+  }
 
   if(/<head[^>]*>/i.test(h)){
-    if(baseHref && !/<base\s/i.test(h)){
+    if(baseHref && !/<base\b/i.test(h)){
       h = h.replace(/<head([^>]*)>/i, '<head$1>' + baseTag + inject);
     } else {
       h = h.replace(/<head([^>]*)>/i, '<head$1>' + inject);
