@@ -1,40 +1,62 @@
-# lumio-assets
+# LUMIO Assets
 
-**Asset repository for [LUMIO-OS](https://github.com/dhisjwhd-svg/LUMIO-OS)**
+Shared app modules and image assets for [LUMIO-OS](https://github.com/dhisjwhd-svg/LUMIO-OS).
 
-This repo stores the application modules and image assets used by LUMIO-OS, a browser-based desktop environment.
+## Repository layout
 
----
+```text
+assets/
+└── apps/
+    ├── Netflix.html
+    ├── Spotify.html
+    ├── Steam.html
+    ├── TFF.html
+    └── directory/
+        ├── Directory.html
+        └── linker.html
+images/
+├── apps/
+│   ├── directory-icon.jpeg
+│   ├── milkbox-icon.png
+│   ├── netflix-cover.jpg
+│   └── spotify-icon.jpg
+├── branding/
+│   └── kon-favicon.jpg
+├── misc/
+│   ├── 43ccffa667f4a188cd544755831639a3.jpg
+│   ├── fd0048fa0231ae5e790e8671faea2157.jpg
+│   └── IMG_0092.jpeg
+└── profiles/
+    ├── kirby-dvd.jpg
+    └── moon-banner.png
+```
 
-## Contents
+## App modules
 
-### `/assets`
-Self-contained HTML application interfaces that can be loaded into the LUMIO-OS desktop:
+| File | Purpose |
+| --- | --- |
+| `assets/apps/Netflix.html` | Netflix-style video interface |
+| `assets/apps/Spotify.html` | Spotify-style music interface |
+| `assets/apps/Steam.html` | Steam-style game launcher |
+| `assets/apps/TFF.html` | The Forged Flowers / Moon profile |
+| `assets/apps/directory/Directory.html` | Directory interface |
+| `assets/apps/directory/linker.html` | Shared directory link data |
 
-| File | Description |
-|------|-------------|
-| `Netflix.html` | Netflix-style video interface |
-| `Spotify.html` | Spotify-style music interface |
-| `Steam.html` | Steam-style game launcher / library |
+## Asset groups
 
-### `/images`
-Supporting images and icons used across the desktop and apps:
+- **`images/apps/`** — images used for app icons and tiles.
+- **`images/branding/`** — desktop branding and favicon assets.
+- **`images/profiles/`** — profile avatar and banner artwork.
+- **`images/misc/`** — existing images whose role is not clearly established yet. These are retained rather than deleted.
 
-- `netflix.jpg`
-- `Kirby-Dvd.jpg`
-- `kon-favicon.jpg`
-- `milkbox.png`
-- Other image assets
+## Using the files
 
----
+LUMIO-OS loads these files from GitHub's raw-content host, with jsDelivr as a fallback where configured. When moving or renaming files, update every URL that references the old path in the same change.
 
-## Usage
+Example raw URL pattern:
 
-These files are designed to be loaded by **LUMIO-OS**.
+```text
+https://raw.githubusercontent.com/dhisjwhd-svg/lumio-assets/main/assets/apps/Netflix.html
+```
 
-You can reference them via:
-
-- Raw GitHub URLs  
-- jsDelivr CDN (recommended for better caching)
-
-**Example (CDN):**
+Keep filenames and paths case-sensitive. The HTML app files are large, self-contained modules, so keep each app together unless its code is deliberately refactored to use separate CSS, JavaScript, or data files.
