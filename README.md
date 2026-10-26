@@ -23,9 +23,7 @@ images/
 ├── branding/
 │   └── kon-favicon.jpg
 ├── misc/
-│   ├── 43ccffa667f4a188cd544755831639a3.jpg
-│   ├── fd0048fa0231ae5e790e8671faea2157.jpg
-│   └── IMG_0092.jpeg
+│   └── fd0048fa0231ae5e790e8671faea2157.jpg
 └── profiles/
     ├── kirby-dvd.jpg
     └── moon-banner.png
@@ -44,16 +42,16 @@ images/
 
 ## Asset groups
 
-- **`images/apps/`** — images used for app icons and tiles.
+- **`images/apps/`** — app icons and tile artwork.
 - **`images/branding/`** — desktop branding and favicon assets.
 - **`images/profiles/`** — profile avatar and banner artwork.
-- **`images/misc/`** — existing images whose role is not clearly established yet. These are retained rather than deleted.
+- **`images/misc/`** — retained image whose purpose is not yet established.
 
 ## Using the files
 
 LUMIO-OS loads these files from GitHub's raw-content host, with jsDelivr as a fallback where configured. When moving or renaming files, update every URL that references the old path in the same change.
 
-Example raw URL pattern:
+Example raw URL:
 
 ```text
 https://raw.githubusercontent.com/dhisjwhd-svg/lumio-assets/main/assets/apps/Netflix.html
