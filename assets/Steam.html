@@ -10060,5 +10060,264 @@ body:not(.steam-mode):not(.yuki-mode):not(.spotify-mode) #pc-desktop:not(.hidden
   window.addEventListener('load', function(){ force(); });
 })();
 </script>
+
+<style id="ff-steam-professional-polish">
+/* Steam UI polish — visual-only overrides; preserves existing navigation and game actions. */
+#steam-app {
+  --bg:#101820;
+  --bg2:#172432;
+  --panel:#141f2b;
+  --card:#1b2b3b;
+  --hover:#263f53;
+  --accent:#66c0f4;
+  --accent2:#3f789b;
+  --text:#dbe5ed;
+  --muted:#9aa9b7;
+  --bright:#f5f8fb;
+  --green:#a4d007;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,"Segoe UI",Roboto,Arial,sans-serif;
+  letter-spacing:0;
+  -webkit-font-smoothing:antialiased;
+}
+#steam-app * { box-sizing:border-box; }
+#steam-app .chrome {
+  height:30px;
+  flex:0 0 30px;
+  padding:0 14px;
+  background:#0b1118;
+  border-bottom:1px solid rgba(255,255,255,.055);
+  color:#8797a6;
+  font-size:11px;
+}
+#steam-app .header {
+  min-height:58px;
+  height:58px;
+  flex:0 0 58px;
+  padding:0 clamp(14px,2.5vw,34px);
+  gap:8px;
+  background:#172431;
+  border-bottom:1px solid rgba(255,255,255,.075);
+  box-shadow:0 5px 18px rgba(0,0,0,.12);
+}
+#steam-app .logo { gap:10px; margin-right:clamp(12px,2vw,28px); }
+#steam-app .logo svg { width:29px;height:29px; }
+#steam-app .logo span { font-size:18px; font-weight:750; letter-spacing:1.2px; }
+#steam-app .tab {
+  position:relative;
+  padding:10px 15px;
+  border-radius:5px;
+  color:#aebdca;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.65px;
+  transition:background .16s ease,color .16s ease;
+}
+#steam-app .tab:hover { background:rgba(255,255,255,.055); color:#fff; }
+#steam-app .tab.on { color:#fff; background:rgba(102,192,244,.105); }
+#steam-app .tab.on::after {
+  content:"";
+  position:absolute;
+  left:15px;right:15px;bottom:1px;
+  height:2px;border-radius:2px;
+  background:var(--accent);
+}
+#steam-app .hdr-r { gap:8px; }
+#steam-app .search {
+  width:clamp(150px,19vw,260px);
+  min-height:35px;
+  padding:0 12px;
+  border:1px solid #304657;
+  border-radius:6px;
+  background:#0f1a24;
+  transition:border-color .16s ease,box-shadow .16s ease;
+}
+#steam-app .search:focus-within {
+  border-color:#66c0f4;
+  box-shadow:0 0 0 3px rgba(102,192,244,.1);
+}
+#steam-app .search input { color:#f5f8fb; font-size:12px; }
+#steam-app .search input::placeholder { color:#7f92a2; }
+#steam-app .hdr-btn {
+  width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;
+  border:1px solid transparent;border-radius:6px;background:transparent;color:#aab9c6;
+  cursor:pointer;transition:background .16s ease,color .16s ease,border-color .16s ease;
+}
+#steam-app .hdr-btn:hover { background:#25394a;color:#fff;border-color:#344d60; }
+#steam-app .steam-disclaimer {
+  display:flex;align-items:center;gap:8px;
+  min-height:34px;padding:7px clamp(14px,2.5vw,34px);
+  background:#172735;border-bottom:1px solid rgba(255,255,255,.055);
+  color:#a8bac8;font-size:11px;line-height:1.45;
+}
+#steam-app .steam-disclaimer button {
+  margin-left:auto;border:0;background:transparent;color:#91a4b3;
+  padding:3px 6px;border-radius:4px;cursor:pointer;
+}
+#steam-app .steam-disclaimer button:hover { background:rgba(255,255,255,.08);color:#fff; }
+#steam-app .steam-address-bar {
+  min-height:31px;padding:0 clamp(14px,2.5vw,34px);
+  display:flex;align-items:center;gap:8px;
+  background:#101a24;border-bottom:1px solid rgba(255,255,255,.055);
+  color:#7f95a7;font-size:10px;
+}
+#steam-app .steam-address-bar .url { color:#8fa9bc; }
+#steam-app .shell { min-height:0; }
+#steam-app .side {
+  width:224px;flex:0 0 224px;
+  padding:10px 10px 14px;
+  background:#131e29;border-right:1px solid rgba(255,255,255,.07);
+}
+#steam-app .side-lab {
+  padding:14px 12px 8px;color:#7f93a4;
+  font-size:10px;font-weight:750;letter-spacing:1px;
+}
+#steam-app .side-item {
+  min-height:36px;padding:8px 12px;gap:10px;
+  border-left:2px solid transparent;border-radius:5px;
+  color:#aebdca;font-size:12px;font-weight:500;
+  transition:background .15s ease,color .15s ease;
+}
+#steam-app .side-item:hover { background:rgba(255,255,255,.045);color:#fff; }
+#steam-app .side-item.on {
+  border-left-color:var(--accent);background:rgba(102,192,244,.11);
+  color:#eaf7ff;font-weight:650;
+}
+#steam-app .side-div { margin:10px 8px;background:rgba(255,255,255,.075); }
+#steam-app .side-list { padding-bottom:18px; }
+#steam-app .sg { min-height:28px;padding:6px 12px;color:#8fa1af;border-radius:4px; }
+#steam-app .sg:hover { color:#e8f0f6;background:rgba(255,255,255,.035); }
+#steam-app .main { background:#101820; }
+#steam-app .scroll {
+  padding:clamp(18px,2.3vw,32px) clamp(18px,3vw,42px) 44px;
+  scrollbar-color:#354b5c #111b25;
+}
+#steam-app .sec {
+  margin:0 0 14px;padding-bottom:10px;
+  border-bottom:1px solid rgba(255,255,255,.075);
+  color:#e6edf3;font-size:12px;font-weight:750;
+  letter-spacing:1px;
+}
+#steam-app .sec .n { padding:3px 7px;border-radius:4px;font-size:10px; }
+#steam-app .shelf { gap:15px;padding:3px 2px 12px;margin-bottom:28px; }
+#steam-app .grid { gap:15px; }
+#steam-app .card {
+  min-width:0;
+  border:1px solid rgba(255,255,255,.065);
+  border-radius:7px;
+  background:#192735;
+  box-shadow:0 2px 8px rgba(0,0,0,.12);
+  transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;
+}
+#steam-app .card:hover {
+  transform:translateY(-3px);
+  border-color:rgba(102,192,244,.55);
+  box-shadow:0 12px 26px rgba(0,0,0,.28);
+}
+#steam-app .card img {
+  display:block;width:100%;aspect-ratio:1/1;object-fit:cover;
+  background:#0c141c;
+}
+#steam-app .card .meta { padding:10px 11px 12px; }
+#steam-app .card .nm { color:#f1f5f8;font-size:12px;font-weight:650;line-height:1.4; }
+#steam-app .card .au { margin-top:4px;color:#91a3b2;font-size:10px;line-height:1.4; }
+#steam-app .fav {
+  top:8px;left:8px;width:28px;height:28px;border-radius:5px;
+  background:rgba(7,14,20,.82);border:1px solid rgba(255,255,255,.12);
+}
+#steam-app .hero {
+  border-radius:8px;overflow:hidden;
+  box-shadow:0 12px 28px rgba(0,0,0,.24);
+  margin-bottom:28px;
+}
+#steam-app .hero .ov {
+  background:linear-gradient(90deg,rgba(7,14,21,.94) 0%,rgba(7,14,21,.72) 43%,rgba(7,14,21,.08) 100%);
+}
+#steam-app .hero h1 {
+  max-width:650px;color:#fff;font-weight:800;
+  letter-spacing:-.035em;line-height:1.05;
+  text-shadow:0 2px 14px rgba(0,0,0,.22);
+}
+#steam-app .btn {
+  min-height:36px;padding:9px 15px;border-radius:5px;
+  font-size:11px;font-weight:750;letter-spacing:.35px;
+  box-shadow:none;transition:filter .15s ease,transform .15s ease,background .15s ease;
+}
+#steam-app .btn:hover { filter:brightness(1.08);transform:translateY(-1px); }
+#steam-app .btn:active { transform:translateY(0); }
+#steam-app .btn-g {
+  color:#10190a;background:linear-gradient(180deg,#b8df35,#8daf19);
+  border:1px solid rgba(218,255,112,.3);
+}
+#steam-app .btn-b {
+  color:#f3f8fc;background:linear-gradient(180deg,#397da3,#285a78);
+  border:1px solid rgba(140,206,241,.18);
+}
+#steam-app .btn-d {
+  background:#263746;color:#d9e6ef;border:1px solid #3a5061;
+}
+#steam-app .detail-banner {
+  border-radius:8px;overflow:hidden;
+  box-shadow:0 10px 28px rgba(0,0,0,.22);
+}
+#steam-app .detail-body { gap:clamp(18px,2.5vw,34px); }
+#steam-app .detail-title { color:#f3f7fa;letter-spacing:-.025em;line-height:1.12; }
+#steam-app .detail-author { color:#93a7b7; }
+#steam-app .detail-desc { color:#c2ced8;line-height:1.75; }
+#steam-app .tags { gap:7px; }
+#steam-app .tag {
+  padding:5px 9px;border:1px solid #344d5f;border-radius:4px;
+  background:#1a2b39;color:#a9c7da;font-size:10px;
+}
+#steam-app .play-box {
+  padding:16px;border:1px solid rgba(255,255,255,.09);border-radius:7px;
+  background:#172633;box-shadow:0 8px 20px rgba(0,0,0,.12);
+}
+#steam-app button:focus-visible,
+#steam-app [role="button"]:focus-visible,
+#steam-app .card:focus-visible {
+  outline:2px solid #8bd5ff;outline-offset:3px;
+}
+#steam-app ::selection { background:rgba(102,192,244,.3);color:#fff; }
+#steam-app ::-webkit-scrollbar { width:9px;height:7px; }
+#steam-app ::-webkit-scrollbar-track { background:#101820; }
+#steam-app ::-webkit-scrollbar-thumb { background:#304556;border:2px solid #101820;border-radius:8px; }
+#steam-app ::-webkit-scrollbar-thumb:hover { background:#496579; }
+@media (max-width:850px) {
+  #steam-app .header { padding:0 12px;gap:3px; }
+  #steam-app .logo { margin-right:5px; }
+  #steam-app .logo span { font-size:15px; }
+  #steam-app .tab { padding:9px 10px;font-size:10px; }
+  #steam-app .side { width:184px;flex-basis:184px; }
+  #steam-app .scroll { padding:18px 18px 34px; }
+  #steam-app .hdr-r { gap:3px; }
+  #steam-app .search { width:clamp(120px,24vw,190px); }
+}
+@media (max-width:620px) {
+  #steam-app .chrome { height:26px;flex-basis:26px; }
+  #steam-app .header { min-height:52px;height:52px;flex-basis:52px;padding:0 10px; }
+  #steam-app .logo svg { width:24px;height:24px; }
+  #steam-app .logo span { font-size:13px;letter-spacing:.7px; }
+  #steam-app .tab { padding:8px 7px;font-size:9px;letter-spacing:.2px; }
+  #steam-app .hdr-btn { width:29px;height:30px; }
+  #steam-app .hdr-btn:nth-of-type(n+3) { display:none; }
+  #steam-app .steam-disclaimer { padding:7px 12px;font-size:10px; }
+  #steam-app .steam-address-bar { padding:0 12px; }
+  #steam-app .side { width:58px;flex-basis:58px;padding:8px 4px; }
+  #steam-app .side-lab,#steam-app .side-div,#steam-app .sg { display:none; }
+  #steam-app .side-item { justify-content:center;padding:10px 4px;font-size:0;gap:0; }
+  #steam-app .side-item span { display:inline-flex; }
+  #steam-app .scroll { padding:16px 12px 28px; }
+  #steam-app .grid { grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px; }
+  #steam-app .shelf { gap:10px; }
+  #steam-app .card .meta { padding:8px; }
+  #steam-app .hero { height:220px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  #steam-app *,#steam-app *::before,#steam-app *::after { scroll-behavior:auto!important;transition:none!important;animation:none!important; }
+}
+</style>
+
 </body>
 </html>
