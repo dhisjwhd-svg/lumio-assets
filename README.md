@@ -153,8 +153,7 @@ A standalone, Discord-inspired profile page for **moon.d.flower**. It provides a
 
 ### App artwork
 
-<box align="center">
-  <table>
+<table>
     <tr>
       <td align="center">
         <img src="https://cdn.jsdelivr.net/gh/dhisjwhd-svg/lumio-assets@main/images/apps/netflix-cover.jpg" alt="Netflix cover artwork" width="180">
@@ -179,8 +178,7 @@ A standalone, Discord-inspired profile page for **moon.d.flower**. It provides a
         <br><code>images/apps/milkbox-icon.png</code>
       </td>
     </tr>
-  </table>
-</box>
+</table>
 
 ### Branding
 
