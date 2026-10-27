@@ -3,86 +3,85 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#080809">
+<meta name="theme-color" content="#08070a">
 <meta name="color-scheme" content="dark">
-<title>The Forged Flowers</title>
+<meta name="description" content="The Forged Flowers — personal profiles and connections.">
+<title>moon.d.flower — The Forged Flowers</title>
 <style>
-:root{color-scheme:dark;--bg:#080809;--panel:rgba(16,16,18,.88);--line:rgba(255,255,255,.11);--text:#f5f3f4;--muted:#929096;--accent:#f0b9d5;--ease:cubic-bezier(.2,.75,.25,1)}
+:root{color-scheme:dark;--accent:#f1b9d8;--accent-rgb:241,185,216;--bg:#08070a;--surface:rgba(13,11,15,.79);--stroke:rgba(255,255,255,.12);--muted:#aaa2ad;--ease:cubic-bezier(.2,.75,.25,1)}
 *{box-sizing:border-box}
-html{min-height:100%;background:var(--bg)}
-body{margin:0;min-height:100svh;display:grid;place-items:center;padding:52px 20px 76px;background:radial-gradient(ellipse 65% 42% at 50% 0%,rgba(169,111,145,.13),transparent 72%),#080809;color:var(--text);font:14px/1.5 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow-x:hidden}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.16;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:42px 42px;mask-image:linear-gradient(to bottom,#000,transparent 85%)}
-.profile{--accent:#f0b9d5;position:relative;width:min(100%,460px);border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--panel);box-shadow:0 28px 90px #0009,0 1px 0 #ffffff09 inset;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);transition:opacity .24s var(--ease),transform .24s var(--ease);isolation:isolate}
-.profile.member-leaving{opacity:0;transform:translateY(8px) scale(.99)}
-.profile.member-entering{opacity:0;transform:translateY(8px) scale(.99)}
-.cover{height:160px;position:relative;overflow:hidden;background:#171218}
-.cover img{width:100%;height:100%;object-fit:cover;display:block;object-position:center 42%;filter:saturate(.82)}
-.cover:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(8,8,9,.1) 35%,#101012 100%)}
-.cover-tag{position:absolute;top:14px;left:16px;z-index:1;font-size:9px;letter-spacing:.19em;text-transform:uppercase;color:#fff9;font-weight:750}
-.card-content{padding:0 24px 20px}
-.identity-row{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-top:-42px;position:relative;z-index:2}
-.avatar-wrap{width:84px;height:84px;flex:0 0 84px;border-radius:50%;padding:4px;background:#101012;border:1px solid #ffffff20;box-shadow:0 8px 26px #0008}
-.avatar{width:100%;height:100%;display:block;border-radius:50%;object-fit:cover;background:#201820}
-.online{display:flex;align-items:center;gap:7px;margin-bottom:10px;color:#aaa7ae;font-size:10px;letter-spacing:.1em;text-transform:uppercase}
-.online:before{content:"";width:6px;height:6px;border-radius:50%;background:#9ac9a6;box-shadow:0 0 12px #9ac9a644}
-.name-line{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:17px}
-.name{margin:0;font-size:27px;line-height:1.12;letter-spacing:-.055em;font-weight:760;overflow-wrap:anywhere}
-.flower-mark{display:inline-grid;place-items:center;width:23px;height:23px;border:1px solid color-mix(in srgb,var(--accent) 38%,transparent);border-radius:7px;color:var(--accent);font-size:13px}
-.handle{margin-top:5px;color:#a5a0a8;font-size:12px}
-.bio{margin:18px 0 0;color:#e2dfe3;font-size:13px;line-height:1.8;white-space:pre-line}
-.bio em{font-style:normal;color:var(--accent)}
-.bio-quote{color:#b5afb7}
-.rule{height:1px;background:linear-gradient(90deg,var(--accent),rgba(255,255,255,.09) 48%,transparent);opacity:.6;margin:20px 0 16px}
-.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:11px}
-.section-title{font-size:9px;font-weight:800;letter-spacing:.19em;text-transform:uppercase;color:#aaa5ad}
-.section-note{font-size:10px;color:#77727a}
-.links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
-.link{display:flex;align-items:center;justify-content:center;gap:7px;min-height:43px;padding:0 8px;border:1px solid #ffffff13;border-radius:10px;background:#ffffff05;color:#eeeaf0;text-decoration:none;font-size:11px;font-weight:650;transition:background .18s,border-color .18s,transform .18s,color .18s}
-.link svg{width:15px;height:15px;flex:none;color:var(--accent)}
-.link:hover{background:color-mix(in srgb,var(--accent) 10%,#ffffff05);border-color:color-mix(in srgb,var(--accent) 45%,transparent);transform:translateY(-2px)}
-.link:focus-visible,.member-arrow:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-.link[hidden]{display:none}
-.links.single{grid-template-columns:1fr}
-.links.single .link{justify-content:flex-start;padding:0 13px}
-.bottom{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:20px;color:#706b73;font-size:9px;letter-spacing:.12em;text-transform:uppercase}
-.bottom-brand{color:var(--accent);font-weight:750}
-.member-arrow{position:fixed;top:50%;z-index:10;width:42px;height:42px;display:grid;place-items:center;border:1px solid #ffffff19;border-radius:50%;background:#111113e8;color:#f5edf2;box-shadow:0 8px 30px #0007;backdrop-filter:blur(12px);transform:translateY(-50%);transition:background .18s,border-color .18s,transform .18s;cursor:pointer}
-.member-arrow:hover{background:#252027;border-color:var(--accent);transform:translateY(-50%) scale(1.05)}
-.member-arrow svg{width:18px;height:18px}
-.member-arrow.left{left:18px}.member-arrow.right{right:18px}.member-arrow[hidden]{display:none}
-.position{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);z-index:5;color:#77717b;font-size:9px;letter-spacing:.2em;text-transform:uppercase;white-space:nowrap}
-body.member-two{--accent:#d6a9ef;background:radial-gradient(ellipse 65% 42% at 50% 0%,rgba(155,107,185,.17),transparent 72%),#080809}
-body.member-two .profile{--accent:#d6a9ef}
-@media(max-width:620px){body{padding:26px 15px 74px}.profile{width:min(100%,460px)}.cover{height:138px}.card-content{padding:0 18px 18px}.member-arrow{top:auto;bottom:15px;transform:none;width:38px;height:38px}.member-arrow:hover{transform:scale(1.05)}.member-arrow.left{left:14px}.member-arrow.right{right:14px}.position{bottom:28px}.name{font-size:24px}}
-@media(max-width:360px){.links{gap:6px}.link{font-size:10px;gap:5px}.link svg{width:13px;height:13px}.cover{height:120px}.name{font-size:22px}}
-@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;scroll-behavior:auto!important}}
+html{min-height:100%;background:var(--bg);scrollbar-color:#39303b #08070a}
+body{margin:0;min-height:100svh;display:grid;place-items:center;padding:44px 22px 64px;overflow-x:hidden;color:#f7f2f7;background:#08070a;font:14px/1.5 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.wallpaper{position:fixed;inset:0;z-index:-3;background:radial-gradient(ellipse 55% 48% at 50% 12%,rgba(var(--accent-rgb),.12),transparent 75%),radial-gradient(ellipse 40% 45% at 80% 90%,rgba(111,72,110,.09),transparent 80%),#08070a;transition:background .35s}
+.wallpaper:before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:38px 38px;mask-image:linear-gradient(#000,transparent 90%);opacity:.45}
+.grain{position:fixed;inset:-50%;z-index:-1;pointer-events:none;opacity:.025;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E")}
+.profile{width:min(100%,510px);position:relative;isolation:isolate;overflow:hidden;border:1px solid rgba(255,255,255,.13);border-radius:17px;background:var(--surface);box-shadow:0 35px 100px #0009,0 1px 0 #ffffff0b inset;backdrop-filter:blur(24px) saturate(125%);-webkit-backdrop-filter:blur(24px) saturate(125%);transition:opacity .22s var(--ease),transform .22s var(--ease),border-color .25s}
+.profile.member-leaving{opacity:0;transform:translateY(7px) scale(.992)}
+.profile.member-entering{opacity:0;transform:translateY(7px) scale(.992)}
+.cover{height:190px;position:relative;overflow:hidden;background:#171018}
+.cover img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 43%;filter:saturate(.84) brightness(.85);transition:transform .8s var(--ease),filter .5s}
+.profile:hover .cover img{transform:scale(1.025);filter:saturate(.96) brightness(.9)}
+.cover:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.1),transparent 32%,rgba(10,8,12,.28) 62%,#0d0b0f 100%)}
+.cover-top{position:absolute;z-index:1;top:15px;left:17px;right:17px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.brand-label{font-size:9px;letter-spacing:.2em;font-weight:800;text-transform:uppercase;color:#fffce0;text-shadow:0 1px 10px #0008}
+.live-mark{display:flex;align-items:center;gap:7px;border:1px solid #ffffff26;border-radius:999px;padding:5px 9px;background:#08070a63;color:#f6eef5;font-size:9px;letter-spacing:.08em;text-transform:uppercase;backdrop-filter:blur(10px)}
+.live-mark:before{content:"";width:5px;height:5px;border-radius:50%;background:#a5d7ac;box-shadow:0 0 9px #a5d7ac75}
+.content{padding:0 27px 20px}
+.identity{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-top:-48px;position:relative;z-index:2}
+.avatar-frame{width:96px;height:96px;flex:0 0 96px;padding:4px;border-radius:50%;background:#0d0b0f;border:1px solid rgba(255,255,255,.19);box-shadow:0 8px 30px #0009}
+.avatar{width:100%;height:100%;display:block;object-fit:cover;border-radius:50%;background:#211722}
+.identity-meta{display:flex;align-items:center;gap:6px;margin-bottom:10px;color:#aaa2ad;font-size:10px;letter-spacing:.04em}
+.verify{width:16px;height:16px;display:grid;place-items:center;border-radius:50%;background:var(--accent);color:#21151e;font-size:10px;font-weight:900}
+.name-row{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:16px}
+.name{margin:0;font-size:29px;line-height:1.1;letter-spacing:-.06em;font-weight:790;overflow-wrap:anywhere}
+.flower-mark{display:inline-grid;place-items:center;width:25px;height:25px;border:1px solid rgba(var(--accent-rgb),.42);border-radius:7px;color:var(--accent);font-size:14px;box-shadow:0 0 20px rgba(var(--accent-rgb),.08)}
+.handle{margin-top:7px;color:#a49ba7;font-size:12px}
+.bio{margin:17px 0 0;max-width:420px;color:#ded7e0;font-size:13px;line-height:1.85;white-space:pre-line}
+.bio .quote{color:#b8aab9;font-style:italic}
+.divider{height:1px;margin:21px 0 17px;background:linear-gradient(90deg,rgba(var(--accent-rgb),.62),rgba(255,255,255,.12) 55%,transparent)}
+.section-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.section-label{color:#aaa0ad;font-size:9px;font-weight:800;letter-spacing:.19em;text-transform:uppercase}
+.section-sub{color:#77707c;font-size:10px}
+.socials{display:flex;gap:9px;flex-wrap:wrap}
+.social{position:relative;display:flex;align-items:center;justify-content:center;gap:9px;min-width:0;min-height:42px;flex:1;padding:0 12px;border:1px solid rgba(255,255,255,.12);border-radius:9px;background:rgba(255,255,255,.035);color:#e9e2eb;text-decoration:none;font-size:11px;font-weight:650;transition:background .2s,border-color .2s,transform .2s,color .2s;overflow:hidden}
+.social:before{content:"";position:absolute;inset:0;background:linear-gradient(110deg,transparent,rgba(var(--accent-rgb),.08),transparent);transform:translateX(-110%);transition:transform .5s}
+.social:hover{transform:translateY(-2px);border-color:rgba(var(--accent-rgb),.5);background:rgba(var(--accent-rgb),.07);color:#fff}
+.social:hover:before{transform:translateX(110%)}
+.social svg{width:16px;height:16px;flex:none;color:var(--accent)}
+.social:focus-visible,.member-arrow:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.socials.single .social{flex:0 1 100%;justify-content:flex-start}
+.socials.single .social:after{content:"↗";margin-left:auto;color:#9c8f9e;font-size:14px}
+.footer{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:21px;padding-top:13px;border-top:1px solid rgba(255,255,255,.065);color:#706975;font-size:9px;letter-spacing:.13em;text-transform:uppercase}
+.footer-brand{color:var(--accent);font-weight:800}
+.member-arrow{position:fixed;top:50%;z-index:10;width:40px;height:40px;display:grid;place-items:center;padding:0;border:1px solid rgba(255,255,255,.16);border-radius:50%;background:rgba(15,12,17,.8);color:#f8eff7;box-shadow:0 8px 30px #0008;backdrop-filter:blur(12px);transform:translateY(-50%);transition:background .18s,border-color .18s,transform .18s;cursor:pointer}
+.member-arrow:hover{background:#251d28;border-color:var(--accent);transform:translateY(-50%) scale(1.06)}
+.member-arrow svg{width:17px;height:17px}
+.member-arrow.left{left:12px}.member-arrow.right{right:12px}.member-arrow[hidden]{display:none}
+@media(max-width:650px){body{padding:25px 14px 64px}.cover{height:155px}.content{padding:0 19px 17px}.avatar-frame{width:86px;height:86px;flex-basis:86px}.identity{margin-top:-43px}.name{font-size:25px}.member-arrow{top:auto;bottom:14px;width:37px;height:37px;transform:none}.member-arrow:hover{transform:scale(1.05)}.member-arrow.left{left:12px}.member-arrow.right{right:12px}}
+@media(max-width:380px){.cover{height:132px}.content{padding-right:15px;padding-left:15px}.name{font-size:23px}.socials{gap:6px}.social{padding:0 8px;font-size:10px;gap:6px}.social svg{width:14px;height:14px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
+<div class="wallpaper" aria-hidden="true"></div><div class="grain" aria-hidden="true"></div>
 <button class="member-arrow left" id="member-prev" type="button" aria-label="Previous member" title="Previous member" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg></button>
 <button class="member-arrow right" id="member-next" type="button" aria-label="Next member" title="Next member"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9.5 5 7 7-7 7"/></svg></button>
 <main class="profile" id="profile" aria-label="The Forged Flowers member profile">
-<header class="cover"><img id="banner" src="https://cdn.jsdelivr.net/gh/dhisjwhd-svg/lumio-assets@main/images/profiles/moon-banner.png" alt="The Forged Flowers profile cover"><span class="cover-tag">THE FORGED FLOWERS / MEMBERS</span></header>
-<div class="card-content">
-<div class="identity-row"><div class="avatar-wrap"><img class="avatar" id="avatar" src="https://cdn.jsdelivr.net/gh/dhisjwhd-svg/lumio-assets@main/images/profiles/kirby-dvd.jpg" alt="moon.d.flower profile picture"></div><div class="online" id="status">member profile</div></div>
-<div class="name-line"><h1 class="name" id="name">moon.d.flower</h1><span class="flower-mark" aria-label="The Forged Flowers">✿</span></div>
+<header class="cover"><img id="banner" src="https://cdn.jsdelivr.net/gh/dhisjwhd-svg/lumio-assets@main/images/profiles/moon-banner.png" alt="Profile cover"><div class="cover-top"><span class="brand-label">THE FORGED FLOWERS</span><span class="live-mark" id="member-status">profile</span></div></header>
+<div class="content">
+<div class="identity"><div class="avatar-frame"><img class="avatar" id="avatar" src="https://cdn.jsdelivr.net/gh/dhisjwhd-svg/lumio-assets@main/images/profiles/kirby-dvd.jpg" alt="moon.d.flower profile picture"></div><div class="identity-meta"><span id="role">personal page</span><span class="verify" aria-label="Flower mark">✿</span></div></div>
+<div class="name-row"><h1 class="name" id="name">moon.d.flower</h1><span class="flower-mark" aria-hidden="true">✧</span></div>
 <div class="handle" id="handle">@moon.d.flower</div>
 <p class="bio" id="bio">Web projects, little details, and things made with purpose.
-<span class="bio-quote">“love isn’t just an emotion but an act of sacrifice.”</span></p>
-<div class="rule"></div>
-<div class="section-head"><span class="section-title">Find me elsewhere</span><span class="section-note" id="connection-note">social links</span></div>
-<nav class="links" id="links" aria-label="Social connections">
-<a class="link" href="https://www.tiktok.com/@moon.d.flower" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.6 7.2a6.8 6.8 0 0 1-4.1-1.4v8.1a6.4 6.4 0 1 1-5.5-6.3v3.5a2.9 2.9 0 1 0 2 2.8V2.5h3.5c.2 2 1.8 3.8 4.1 4z"/></svg>TikTok</a>
-<a class="link" href="https://www.instagram.com/moon.d.flower" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.7" r=".8" fill="currentColor" stroke="none"/></svg>Instagram</a>
-<a class="link" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19.1 4.6 12 4.6 12 4.6s-7.1 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.8.5 8.9.5 8.9.5s7.1 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8ZM9.7 15.4V8.6l5.9 3.4-5.9 3.4Z"/></svg>YouTube</a>
-</nav>
-<footer class="bottom"><span class="profile-number">profile 001</span><span class="bottom-brand">the forged flowers</span></footer>
+<span class="quote">“love isn’t just an emotion but an act of sacrifice.”</span></p>
+<div class="divider"></div>
+<div class="section-top"><span class="section-label">Connections</span><span class="section-sub" id="connection-note">social profiles</span></div>
+<nav class="socials" id="socials" aria-label="Social connections"></nav>
+<footer class="footer"><span class="profile-number">profile 001</span><span class="footer-brand">the forged flowers</span></footer>
 </div></main>
-<div class="position" id="position" aria-live="polite">01 / 02</div>
 <script>
 (()=>{'use strict';
-const $=id=>document.getElementById(id);
-const card=$('profile'),prev=$('member-prev'),next=$('member-next');
+const $=id=>document.getElementById(id),card=$('profile'),prev=$('member-prev'),next=$('member-next');
 const members=[
 {name:'moon.d.flower',handle:'@moon.d.flower',bio:'Web projects, little details, and things made with purpose.\n“love isn’t just an emotion but an act of sacrifice.”',banner:'https://cdn.jsdelivr.net/gh/dhisjwhd-svg/lumio-assets@main/images/profiles/moon-banner.png',avatar:'https://cdn.jsdelivr.net/gh/dhisjwhd-svg/lumio-assets@main/images/profiles/kirby-dvd.jpg',links:[{label:'TikTok',url:'https://www.tiktok.com/@moon.d.flower',icon:'tiktok'},{label:'Instagram',url:'https://www.instagram.com/moon.d.flower',icon:'instagram'},{label:'YouTube',url:'https://www.youtube.com/',icon:'youtube'}]},
 {name:'satoshi wizard',handle:'@satoshiwizard',bio:'not everything needs an explanation ✧',banner:'https://cdn.jsdelivr.net/gh/dhisjwhd-svg/lumio-assets@main/images/profiles/satoshiwizard-banner.jpeg',avatar:'https://cdn.jsdelivr.net/gh/dhisjwhd-svg/lumio-assets@main/images/profiles/satoshiwizard-pfp.jpeg',links:[{label:'TikTok',url:'https://www.tiktok.com/@satoshiwizard',icon:'tiktok'}]}
@@ -94,9 +93,9 @@ youtube:'<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d
 };
 let active=0,busy=false;
 function setImage(img,url,alt){img.onerror=null;img.src=url;img.alt=alt;img.onerror=()=>{if(img.src.includes('cdn.jsdelivr.net/gh/dhisjwhd-svg/lumio-assets@main/')){img.onerror=null;img.src=url.replace('https://cdn.jsdelivr.net/gh/dhisjwhd-svg/lumio-assets@main/','https://raw.githubusercontent.com/dhisjwhd-svg/lumio-assets/main/');}}}
-function render(index){const m=members[index];document.body.classList.toggle('member-two',index===1);card.style.setProperty('--accent',index===1?'#d6a9ef':'#f0b9d5');$('name').textContent=m.name;$('handle').textContent=m.handle;$('bio').textContent=m.bio;setImage($('banner'),m.banner,m.name+' cover');setImage($('avatar'),m.avatar,m.name+' profile picture');$('status').textContent='member profile';$('connection-note').textContent=m.links.length===1?'1 connection':'social links';$('links').classList.toggle('single',m.links.length===1);$('links').innerHTML=m.links.map(l=>'<a class="link" href="'+l.url+'" target="_blank" rel="noopener noreferrer" aria-label="'+l.label+'">'+icons[l.icon]+l.label+'</a>').join('');document.querySelector('.profile-number').textContent='profile '+String(index+1).padStart(3,'0');$('position').textContent=String(index+1).padStart(2,'0')+' / '+String(members.length).padStart(2,'0');prev.hidden=index===0;next.hidden=index===members.length-1;document.title=m.name+' — The Forged Flowers'}
-function go(index){if(busy||index<0||index>=members.length||index===active)return;busy=true;card.classList.add('member-leaving');setTimeout(()=>{active=index;render(active);card.classList.remove('member-leaving');card.classList.add('member-entering');requestAnimationFrame(()=>requestAnimationFrame(()=>{card.classList.remove('member-entering');setTimeout(()=>busy=false,260)}))},240)}
-prev.addEventListener('click',()=>go(active-1));next.addEventListener('click',()=>go(active+1));document.addEventListener('keydown',e=>{if(e.altKey||e.ctrlKey||e.metaKey)return;if(e.key==='ArrowLeft'&&!prev.hidden)go(active-1);if(e.key==='ArrowRight'&&!next.hidden)go(active+1)});render(0)
+function render(index){const m=members[index];document.body.style.setProperty('--accent',index===1?'#d8b0f2':'#f1b9d8');document.body.style.setProperty('--accent-rgb',index===1?'216,176,242':'241,185,216');$('name').textContent=m.name;$('handle').textContent=m.handle;$('bio').textContent=m.bio;setImage($('banner'),m.banner,m.name+' cover');setImage($('avatar'),m.avatar,m.name+' profile picture');$('role').textContent=index===0?'personal page':'member profile';$('member-status').textContent='profile 00'+(index+1);$('socials').classList.toggle('single',m.links.length===1);$('connection-note').textContent=m.links.length===1?'1 social profile':'social profiles';$('socials').innerHTML=m.links.map(l=>'<a class="social" href="'+l.url+'" target="_blank" rel="noopener noreferrer" aria-label="'+l.label+'">'+icons[l.icon]+'<span>'+l.label+'</span></a>').join('');document.querySelector('.profile-number').textContent='profile 00'+(index+1);prev.hidden=index===0;next.hidden=index===members.length-1;document.title=m.name+' — The Forged Flowers'}
+function go(index){if(busy||index<0||index>=members.length||index===active)return;busy=true;card.classList.add('member-leaving');setTimeout(()=>{active=index;render(active);card.classList.remove('member-leaving');card.classList.add('member-entering');requestAnimationFrame(()=>requestAnimationFrame(()=>{card.classList.remove('member-entering');setTimeout(()=>busy=false,240)}))},220)}
+prev.addEventListener('click',()=>go(active-1));next.addEventListener('click',()=>go(active+1));document.addEventListener('keydown',e=>{if(e.altKey||e.ctrlKey||e.metaKey)return;if(e.key==='ArrowLeft'&&!prev.hidden)go(active-1);if(e.key==='ArrowRight'&&!next.hidden)go(active+1)});let touchX=null;card.addEventListener('touchstart',e=>{touchX=e.changedTouches[0].clientX},{passive:true});card.addEventListener('touchend',e=>{if(touchX===null)return;const dx=e.changedTouches[0].clientX-touchX;if(Math.abs(dx)>65)go(active+(dx<0?1:-1));touchX=null},{passive:true});render(0)
 })();
 </script>
 </body>
