@@ -22,27 +22,6 @@
 (async function () {
   const RAW = 'https://raw.githubusercontent.com/dhisjwhd-svg/lumio-assets/a4f1378a46fff27ffc8e1c3507f7f88d89891247/assets/apps/Steam.html';
 
-  const PLAYER = '<style id="steam-in-app-player-style">' +
-    '#steam-game-player{position:fixed;inset:0;z-index:2147483000;display:none;background:#070b10;color:#eaf2f8;font:14px/1.5 system-ui,-apple-system,sans-serif}' +
-    '#steam-game-player.open{display:flex;flex-direction:column}' +
-    '#steam-game-player .sgp-bar{height:48px;min-height:48px;display:flex;align-items:center;gap:12px;padding:0 16px;background:#111b26;border-bottom:1px solid #2a3b4b;box-shadow:0 4px 18px #0006}' +
-    '#steam-game-player .sgp-title{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:700;color:#eaf2f8}' +
-    '#steam-game-player .sgp-state{margin-left:auto;color:#8ea6b9;font-size:11px}' +
-    '#steam-game-player .sgp-close{border:1px solid #3b5062;border-radius:8px;background:#1c2b39;color:#f4f8fb;padding:7px 12px;font:inherit;font-weight:650;cursor:pointer}' +
-    '#steam-game-player .sgp-close:hover{background:#2b4052;border-color:#66c0f4}' +
-    '#steam-game-player iframe{display:block;flex:1;width:100%;height:calc(100% - 48px);min-height:0;border:0;background:#000}' +
-    '@media(max-width:600px){#steam-game-player .sgp-bar{height:44px;min-height:44px;padding:0 10px;gap:8px}#steam-game-player .sgp-state{display:none}#steam-game-player .sgp-close{padding:6px 10px}}' +
-    '</style>' +
-    '<section id="steam-game-player" role="dialog" aria-modal="true" aria-label="Game player">' +
-    '<header class="sgp-bar"><span class="sgp-title" id="sgp-title">Launching game…</span><span class="sgp-state" id="sgp-state">Preparing game</span><button class="sgp-close" id="sgp-close" type="button">← Steam</button></header>' +
-    '<iframe id="sgp-frame" title="Game" allow="autoplay; fullscreen; gamepad; clipboard-read; clipboard-write" allowfullscreen></iframe></section>' +
-    '<script>(function(){' +
-    'var root=document.getElementById("steam-game-player"),frame=document.getElementById("sgp-frame"),title=document.getElementById("sgp-title"),state=document.getElementById("sgp-state"),close=document.getElementById("sgp-close"),token=0;' +
-    'if(!root||!frame||!close)return;' +
-    'function closePlayer(){token++;root.classList.remove("open");frame.srcdoc="";frame.removeAttribute("src");if(typeof startMenuMusic==="function"&&typeof musicOn!=="undefined"&&musicOn&&typeof audioOn!=="undefined"&&audioOn){try{startMenuMusic()}catch(e){}}}' +
-    'close.addEventListener("click",closePlayer);document.addEventListener("keydown",function(e){if(e.key==="Escape"&&root.classList.contains("open")){e.preventDefault();closePlayer()}});' +
-    'window.launchGame=async function(){var z=typeof current!=="undefined"?current:null;if(!z||typeof gameUrl!=="function"){if(typeof toast==="function")toast("Choose a game first");return false}var url=gameUrl(z);if(!url){if(typeof toast==="function")toast("This game has no playable URL");return false}if(/discord\\.(gg|com)/i.test(url)){if(typeof toast==="function")toast("Skipped promo link");return false}var gameWindow=null;try{gameWindow=window.open("about:blank","_blank")}catch(e){}if(!gameWindow){if(typeof toast==="function")toast("Allow pop-ups to open games in a new tab");return false}try{if(typeof sfx==="function")sfx("launch");if(typeof stopMenuMusic==="function")stopMenuMusic();if(typeof addRecent==="function")addRecent(z.id);gameWindow.document.open();gameWindow.document.write("<!doctype html><html><head><meta charset=utf-8><meta name=viewport content=width=device-width,initial-scale=1><title>Loading game</title><style>html,body{margin:0;height:100%;background:#080d13;color:#dce8f1;font:14px system-ui}body{display:grid;place-items:center}</style></head><body>Loading game…</body></html>");gameWindow.document.close();if(typeof steamFetchGameHtml!=="function")throw new Error("Game loader unavailable");var html=await steamFetchGameHtml(url);var base=url.substring(0,url.lastIndexOf("/")+1);if(typeof steamStripAdsFromHtml==="function")html=steamStripAdsFromHtml(html,base);if(gameWindow.closed)return false;gameWindow.document.open();gameWindow.document.write(html);gameWindow.document.close();gameWindow.focus();return true}catch(err){console.warn("[Steam] new-tab launch failed",err);try{if(!gameWindow.closed)gameWindow.location.href=url}catch(navError){}if(typeof toast==="function")toast("Could not prepare game files; opening the game link directly");return false}};' +
-    '})();' + '<' + '/script>';
   const STYLE = `<style id="steam-aesthetic-2026-revamp">
 /* =========================================================
    STEAM AESTHETIC REVAMP — Professional / Cool / Polished
@@ -577,7 +556,7 @@
     let html = await res.text();
     // inject aesthetic pass before </body>
     if (html.includes("</body>")) {
-      html = html.replace("</body>", STYLE + "\n" + PLAYER + "\n</body>");
+      html = html.replace("</body>", STYLE + "\n</body>");
     } else {
       html += STYLE;
     }
