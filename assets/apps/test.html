@@ -165,7 +165,7 @@ youtube:'<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d
 const $=id=>document.getElementById(id),grid=$('members-grid'),modal=$('member-modal');let lastFocus=null,toastTimer;
 function imageFallback(img,url){img.loading='lazy';img.decoding='async';img.onerror=()=>{img.onerror=null;if(url.includes('cdn.jsdelivr.net/gh/dhisjwhd-svg/lumio-assets@main/'))img.src=url.replace('https://cdn.jsdelivr.net/gh/dhisjwhd-svg/lumio-assets@main/','https://raw.githubusercontent.com/dhisjwhd-svg/lumio-assets/main/');};img.src=url}
 function safeLink(link){const a=document.createElement('a');a.href=link.url;a.target='_blank';a.rel='noopener noreferrer';a.innerHTML=(icons[link.icon]||'')+'<span>'+link.label+'</span><span aria-hidden="true">↗</span>';return a}
-function renderMembers(){members.forEach((m,i)=>{const card=document.createElement('button');card.type='button';card.className='member-card';card.setAttribute('aria-label','Open profile for '+m.name);card.innerHTML='<div class="member-cover"><img alt="" loading="lazy" decoding="async"></div><div class="member-card-body"><img class="member-avatar" alt="" loading="lazy" decoding="async"><div class="member-number">'+m.number+'</div><h3 class="member-name"></h3><div class="member-handle"></div><p class="member-bio"></p><div class="member-bottom"><span>View profile</span><span aria-hidden="true">↗</span></div></div>';card.querySelector('.member-name').textContent=m.name;card.querySelector('.member-handle').textContent=m.handle;card.querySelector('.member-bio').textContent=m.bio;const imgs=card.querySelectorAll('img');imageFallback(imgs[0],m.banner);imageFallback(imgs[1],m.avatar);card.addEventListener('click',()=>openMember(i));grid.append(card)})}
+function renderMembers(){members.forEach((m,i)=>{const card=document.createElement('button');card.type='button';card.className='member-card';card.setAttribute('aria-label','Open profile for '+m.name);card.dataset.search=[m.name,m.handle,m.bio,m.number].join(' ');card.dataset.hasLinks=String(m.links.length>0);card.innerHTML='<div class="member-cover"><img alt="" loading="lazy" decoding="async"></div><div class="member-card-body"><img class="member-avatar" alt="" loading="lazy" decoding="async"><div class="member-number">'+m.number+'</div><h3 class="member-name"></h3><div class="member-handle"></div><p class="member-bio"></p><div class="member-bottom"><span>View profile</span><span aria-hidden="true">↗</span></div></div>';card.querySelector('.member-name').textContent=m.name;card.querySelector('.member-handle').textContent=m.handle;card.querySelector('.member-bio').textContent=m.bio;const imgs=card.querySelectorAll('img');imageFallback(imgs[0],m.banner);imageFallback(imgs[1],m.avatar);card.addEventListener('click',()=>openMember(i));grid.append(card)})}
 function openMember(i){const m=members[i];lastFocus=document.activeElement;$('modal-name').textContent=m.name;$('modal-number').textContent=m.number;$('modal-handle').textContent=m.handle;$('modal-bio').textContent=m.bio;imageFallback($('modal-banner'),m.banner);imageFallback($('modal-avatar'),m.avatar);$('modal-banner').alt=m.name+' banner';$('modal-avatar').alt=m.name+' profile picture';const links=$('modal-links');links.replaceChildren();if(m.links.length){m.links.forEach(link=>links.append(safeLink(link)))}else{const note=document.createElement('span');note.style.cssText='color:#9f96a4;font-size:11px';note.textContent='No public links added yet.';links.append(note)}modal.classList.add('open');document.body.style.overflow='hidden';$('modal-close').focus()}
 function closeModal(){modal.classList.remove('open');document.body.style.overflow='';if(lastFocus&&lastFocus.focus)lastFocus.focus()}
 $('modal-close').addEventListener('click',closeModal);modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});document.addEventListener('keydown',e=>{if(e.key==='Escape'&&modal.classList.contains('open'))closeModal()});
@@ -191,10 +191,9 @@ function applyMemberFilters(){
  const normalized = normalize(query);
  let visible = 0;
  cards.forEach((card,index)=>{
-  const member = members[index];
-  const haystack = normalize([member.name,member.handle,member.bio,member.number].join(' '));
+  const haystack = normalize(card.dataset.search || '');
   const matchesText = !normalized || haystack.includes(normalized);
-  const matchesFilter = activeFilter === 'all' || member.links.length > 0;
+  const matchesFilter = activeFilter === 'all' || card.dataset.hasLinks === 'true';
   const show = matchesText && matchesFilter;
   card.hidden = !show;
   if(show) visible++;
@@ -206,7 +205,7 @@ function applyMemberFilters(){
    empty.id='member-empty-state';
    empty.className='member-empty';
    empty.innerHTML='<div><strong>No members found</strong><span>Try a different name or switch the filter.</span></div>';
-   grid.append(empty);
+   byId('members-grid').append(empty);
   }
  }else if(empty){empty.remove();}
  if(count) count.textContent=visible+' '+(visible===1?'member':'members');
