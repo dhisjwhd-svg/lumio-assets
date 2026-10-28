@@ -2061,6 +2061,155 @@ to {
 
 }
 
+
+/* FIELD REDESIGN — image-led editorial direction */
+:root{color-scheme:dark;--bg:#080809;--panel:#101012;--panel2:#18171a;--line:rgba(255,255,255,.14);--muted:#aaa5ad;--paper:#f7f3f5;--accent:#ff6a9d;--max:1320px;--ease:cubic-bezier(.2,.8,.2,1)}
+html{background:#080809}
+body{background:#080809;color:#f7f3f5;font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+.bg-glow{background:radial-gradient(ellipse 50% 40% at 90% 8%,rgba(255,67,130,.16),transparent 70%),radial-gradient(ellipse 40% 50% at 0% 60%,rgba(98,74,128,.13),transparent 70%)}
+.grain{opacity:.028}
+.wrap{width:min(var(--max),calc(100% - 64px))}
+.nav-shell{background:rgba(8,8,9,.88);border-bottom:1px solid #ffffff15}
+.nav{min-height:78px}
+.brand{font-size:10px;letter-spacing:.2em}
+.brand-mark{width:36px;height:36px;border-radius:50%;border-color:#ff6a9d66;background:#ff6a9d12;color:#ff8fb4;font-size:20px}
+.nav-links{gap:32px}
+.nav-links a{font-size:12px}
+.nav-cta{border-radius:999px;padding:11px 18px;border-color:#ffffff25}
+.hero{width:100%;max-width:none;min-height:650px;padding:74px max(32px,calc((100vw - 1320px)/2)) 88px;grid-template-columns:1fr .9fr;gap:7vw;background:linear-gradient(110deg,#0a090b 0%,#0a090b 48%,#171016 100%);border-bottom:1px solid #ffffff17}
+.hero-copy-wrap{position:relative;z-index:3}
+.eyebrow{font-size:10px;letter-spacing:.24em;color:#ff8eb5}
+.eyebrow:before{width:32px;height:2px;background:#ff6a9d}
+.hero h1{font-size:clamp(64px,8.5vw,128px);letter-spacing:-.105em;line-height:.79;margin:34px 0 30px;font-weight:900}
+.hero h1 span{color:#ff6a9d;margin-left:0}
+.hero-copy{max-width:430px;font-size:15px;line-height:1.85;color:#c0b9c2}
+.hero-actions{gap:12px;margin-top:35px}
+.button{border-radius:999px;padding:0 21px;min-height:48px;font-size:12px}
+.button.primary{background:#ff6a9d;border-color:#ff6a9d;color:#17090f}
+.button.primary:hover{background:#ff8db4;border-color:#ff8db4}
+.button:not(.primary){background:#ffffff08}
+.hero-art{min-height:470px;border:1px solid #ffffff20;border-radius:4px;overflow:hidden;isolation:isolate;background:#21121b url('https://cdn.jsdelivr.net/gh/dhisjwhd-svg/lumio-assets@main/images/profiles/moon-banner.png') center 42%/cover no-repeat;box-shadow:0 35px 100px #0008}
+.hero-art:after{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(180deg,rgba(5,4,7,.03) 5%,rgba(5,4,7,.12) 40%,rgba(5,4,7,.86) 100%),linear-gradient(90deg,#130b12aa,transparent 70%)}
+.hero-art .orb,.hero-art .orbit{display:none}
+.hero-symbol{width:auto;height:auto;position:absolute;z-index:2;left:25px;bottom:25px;transform:none;animation:none;border:0;border-radius:0;background:transparent;box-shadow:none;font-family:Georgia,serif;font-size:clamp(42px,5vw,74px);color:#fff;text-shadow:0 2px 25px #0008}
+.art-label{z-index:2;bottom:29px;right:24px;color:#fff;font-size:9px;letter-spacing:.22em}
+.art-label span{color:#ff8fb4}
+.section{padding:105px 0;border-top:1px solid #ffffff0c}
+.section-heading{margin-bottom:38px;align-items:end}
+.section-kicker{color:#ff80aa;letter-spacing:.22em;font-size:10px}
+.section h2{font-size:clamp(40px,5vw,68px);letter-spacing:-.085em;line-height:.95;margin-top:16px}
+.section-intro{font-size:13px;line-height:1.9;max-width:390px}
+.about-grid{gap:12px}
+.about-card{min-height:245px;padding:30px;border-radius:3px;background:#101012;border-color:#ffffff18}
+.about-card .index{color:#ff80aa;letter-spacing:.18em}
+.about-card h3{font-size:25px;letter-spacing:-.06em;margin-top:48px}
+.about-card p{font-size:13px;line-height:1.85;color:#b9b1bd}
+.quote-card{border-radius:3px;background:#ff6a9d;padding:30px 34px;border:0;min-height:150px}
+.quote-card blockquote{font-family:Georgia,serif;font-size:clamp(23px,3vw,37px);color:#1a0a11;letter-spacing:-.035em}
+.quote-flower{color:#240d17;font-size:42px}
+#members{background:#f2edf0;color:#141014}
+#members .section-kicker{color:#9e315d}
+#members .section-intro{color:#68616a}
+#members .member-hint{color:#6d626c}
+.member-tools{margin:0 0 26px;gap:15px}
+.member-search{height:47px;background:#fff;color:#1b151b;border-color:#d8cbd3;border-radius:2px;font-size:12px}
+.member-search::placeholder{color:#817781}
+.member-search-wrap svg{color:#8d7d88}
+.member-filter{min-height:42px;border-radius:2px;border-color:#d8cbd3;color:#615660;font-size:11px}
+.member-filter[aria-pressed=true]{background:#171016;color:#fff;border-color:#171016}
+.member-count{color:#6e626d}
+.members-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.member-card{border-radius:3px;background:#fff;border-color:#dfd3db;color:#181219;box-shadow:0 4px 16px #35152908}
+.member-card:hover{transform:translateY(-7px);border-color:#d74e82;box-shadow:0 20px 45px #35152916}
+.member-cover{height:clamp(170px,19vw,265px);background:#21131d}
+.member-cover:after{background:linear-gradient(180deg,#0000 45%,#0a070b99 100%)}
+.member-cover img{object-position:center 38%}
+.member-card-body{padding:0 20px 20px}
+.member-avatar{width:76px;height:76px;margin-top:-38px;border:4px solid #fff;background:#ded4dc}
+.member-card:hover .member-avatar{border-color:#fff;transform:translateY(-4px)}
+.member-number{top:18px;right:16px;z-index:2;color:#fff;background:#0906098c;padding:7px 9px;letter-spacing:.14em}
+.member-name{font-size:22px;letter-spacing:-.065em;margin-top:15px;color:#191219}
+.member-handle{font-size:12px;color:#8a7381}
+.member-bio{font-size:12px;color:#6e626d;line-height:1.75;min-height:42px;margin:13px 0 18px}
+.member-bottom{border-top:1px solid #e8dfe5;color:#a52c5b;font-size:11px;padding-top:15px}
+.member-empty{color:#5f535e;border-color:#d6c7d0}
+.member-empty strong{color:#1d151c}
+#work .work-grid{gap:12px}
+.work-card{border-radius:3px;background:#101012;border-color:#ffffff17;min-height:245px;padding:28px}
+.work-icon{border-radius:50%;width:45px;height:45px;border-color:#ff6a9d50;background:#ff6a9d12;color:#ff7eaa}
+.work-card h3{font-size:22px;letter-spacing:-.055em;margin-top:34px}
+.work-card p{font-size:13px;line-height:1.9}
+.project-feature{border-radius:3px;padding:0;overflow:hidden;background:#111012;grid-template-columns:1fr 1.05fr;gap:0;border-color:#ffffff20}
+.project-copy{padding:clamp(28px,5vw,66px)}
+.project-label{color:#ff8fb4}
+.project-copy h3{font-size:clamp(42px,6vw,76px);letter-spacing:-.09em}
+.project-copy p{font-size:13px;line-height:1.9}
+.project-visual{min-height:370px;border:0;border-radius:0;background:#0f0c10 url('https://cdn.jsdelivr.net/gh/dhisjwhd-svg/lumio-assets@main/images/apps/netflix-cover.jpg') center/cover no-repeat}
+.project-visual:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#11101299,transparent 80%),linear-gradient(0deg,#08080999,transparent 50%)}
+.mini-window{position:relative;z-index:2;backdrop-filter:blur(14px);width:76%;border-radius:3px;background:#0c0a0bcf;border-color:#ffffff38;transform:rotate(-3deg)}
+.mini-content span{border-radius:2px;background:linear-gradient(135deg,#ff6a9d44,#ffffff05)}
+.project-caption{z-index:2;color:#fff;letter-spacing:.2em}
+.connections-panel{border-radius:3px;padding:34px;background:#111012;border-color:#ffffff19}
+.connections-panel h3{font-size:25px;letter-spacing:-.06em}
+.connections-panel p{font-size:13px;line-height:1.8}
+.connection-links a{border-radius:2px;padding:12px 16px;font-size:12px}
+.connection-links svg{color:#ff80aa}
+.footer{padding:32px 0 38px}
+.footer-left{letter-spacing:.2em}
+.modal-card{border-radius:4px;background:#111012}
+.modal-links a{border-radius:2px}
+.copy-handle{border-radius:2px}
+.back-top-float{border-radius:2px;background:#ff6a9d;color:#17090f}
+.scroll-progress span{background:#ff6a9d;box-shadow:0 0 12px #ff6a9d77}
+.keyboard-shortcut kbd{border-radius:2px}
+@media(max-width:800px){
+ .wrap{width:calc(100% - 40px)}
+ .hero{width:100%;padding:54px 24px 60px;grid-template-columns:1fr;gap:35px}
+ .hero-art{grid-row:1;min-height:330px;width:100%}
+ .hero-copy-wrap{grid-row:2}
+ .hero h1{font-size:clamp(66px,13vw,105px)}
+ .members-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .member-cover{height:clamp(145px,27vw,230px)}
+ .project-feature{grid-template-columns:1fr}
+ .project-visual{grid-row:1;min-height:280px}
+ .project-copy{padding:32px}
+ .section{padding:75px 0}
+}
+@media(max-width:580px){
+ .wrap{width:calc(100% - 30px)}
+ .hero{padding:34px 15px 48px;gap:23px}
+ .hero-art{min-height:270px}
+ .hero h1{font-size:clamp(56px,15vw,84px);margin:25px 0}
+ .hero-copy{font-size:13px}
+ .section{padding:68px 0}
+ .section h2{font-size:clamp(37px,11vw,52px)}
+ .section-heading{display:block}
+ .section-intro{margin-top:16px}
+ .about-card{min-height:200px;padding:23px}
+ .about-card h3{margin-top:32px;font-size:22px}
+ .quote-card{padding:22px;align-items:center}
+ .quote-card blockquote{font-size:24px}
+ .member-tools{align-items:stretch;flex-direction:column}
+ .member-search-wrap{max-width:none}
+ .member-filters{justify-content:space-between}
+ .member-filter{flex:1}
+ .members-grid{gap:9px}
+ .member-cover{height:125px}
+ .member-card-body{padding:0 12px 14px}
+ .member-avatar{width:58px;height:58px;margin-top:-29px}
+ .member-number{top:9px;right:8px;font-size:7px;padding:5px 6px}
+ .member-name{font-size:16px;margin-top:12px}
+ .member-handle{font-size:10px;overflow-wrap:anywhere}
+ .member-bio{font-size:10px;min-height:48px;margin:10px 0 12px}
+ .member-bottom{font-size:9px}
+ .work-card{padding:23px}
+ .project-visual{min-height:210px}
+ .project-copy{padding:25px}
+ .connections-panel{padding:24px}
+ .footer-inner{gap:14px}
+}
+@media(max-width:360px){.members-grid{grid-template-columns:1fr}.member-cover{height:180px}}
+
 </style>
 </head>
 <body>
@@ -2077,7 +2226,7 @@ to {
 <main id="home">
 <section class="hero wrap">
 <div class="hero-copy-wrap"><div class="eyebrow">An independent digital collective</div><h1>THE FORGED<span>FLOWERS.</span></h1><p class="hero-copy">A small collective built around people, ideas, and things made on the internet. Get to know the members, see what we make, and follow the work as it grows.</p><div class="hero-actions"><a class="button primary" href="#members">Meet the members <span aria-hidden="true">↗</span></a><a class="button" href="#work">What we do <span aria-hidden="true">↓</span></a></div></div>
-<div class="hero-art" aria-hidden="true"><div class="orbit"></div><div class="orbit two"></div><div class="orb"></div><div class="hero-symbol">✿</div><div class="art-label">Independent by nature <span>✳</span></div></div>
+<div class="hero-art" role="img" aria-label="The Forged Flowers visual identity, using the collective’s profile artwork"><div class="hero-symbol">✿</div><div class="art-label">Independent by nature <span>✳</span></div></div>
 </section>
 <section class="section" id="about"><div class="wrap reveal"><div class="section-heading"><div><div class="section-kicker">01 / Who we are</div><h2>People first.<br>Make things that matter.</h2></div><p class="section-intro">The Forged Flowers is a member-led corner of the internet for personal expression, digital projects, and sharing the things we care about.</p></div>
 <div class="about-grid"><article class="about-card"><div class="index">A / THE PEOPLE</div><h3>Different people, one place.</h3><p>Every member brings their own style and interests. The site is a place to discover who they are and find their personal pages and connections.</p></article><article class="about-card"><div class="index">B / THE WORK</div><h3>Built, not just talked about.</h3><p>We explore web design, development, and creative ideas through real projects. The focus stays on what we make and what we learn along the way.</p></article><div class="quote-card"><blockquote>“love isn’t just an emotion but an act of sacrifice.”</blockquote><span class="quote-flower" aria-hidden="true">✿</span></div></div></div></section>
@@ -2088,7 +2237,7 @@ to {
 <section class="section" id="work"><div class="wrap reveal"><div class="section-heading"><div><div class="section-kicker">03 / What we do</div><h2>Our corner of the internet.</h2></div><p class="section-intro">A few of the areas that shape the collective. The projects and profiles are the proof; no made-up client list or inflated claims.</p></div>
 <div class="work-grid"><article class="work-card"><div class="work-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v5"/></svg></div><h3>Web & interfaces</h3><p>Building web pages and browser experiences with careful layouts, responsive details, and interactions that actually work.</p></article><article class="work-card"><div class="work-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3 14.7 8.3 21 9.2 16.5 13.6 17.6 20 12 17 6.4 20 7.5 13.6 3 9.2 9.3 8.3 12 3Z"/></svg></div><h3>Design & identity</h3><p>Personal pages, visual systems, icons, and small details that give a digital project its own personality.</p></article><article class="work-card"><div class="work-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></svg></div><h3>Experiments & builds</h3><p>Trying ideas, improving existing projects, and learning by making things people can explore and use.</p></article></div></div></section>
 <section class="section" id="projects"><div class="wrap reveal"><div class="section-heading"><div><div class="section-kicker">04 / Selected work</div><h2>Things we're building.</h2></div><p class="section-intro">A real project from the wider digital workspace. More work can be added here as it is ready to share.</p></div>
-<article class="project-feature"><div class="project-copy"><div class="project-label">Featured project · Web development</div><h3>LUMIO-OS</h3><p>A browser-based desktop environment exploring a familiar PC-style interface, custom apps, and a growing set of digital tools.</p><a class="button" href="https://github.com/dhisjwhd-svg/LUMIO-OS" target="_blank" rel="noopener noreferrer">Explore the project <span aria-hidden="true">↗</span></a></div><div class="project-visual" aria-label="Abstract preview of a desktop interface"><div class="mini-window"><div class="mini-bar"><i></i><i></i><i></i></div><div class="mini-content"><span></span><span></span><span></span></div></div><div class="project-caption">Interface study / LUMIO</div></div></article></div></section>
+<article class="project-feature"><div class="project-copy"><div class="project-label">Featured project · Web development</div><h3>LUMIO-OS</h3><p>A browser-based desktop environment exploring a familiar PC-style interface, custom apps, and a growing set of digital tools.</p><a class="button" href="https://github.com/dhisjwhd-svg/LUMIO-OS" target="_blank" rel="noopener noreferrer">Explore the project <span aria-hidden="true">↗</span></a></div><div class="project-visual" aria-label="Artwork from the Lumio Assets collection"><div class="mini-window"><div class="mini-bar"><i></i><i></i><i></i></div><div class="mini-content"><span></span><span></span><span></span></div></div><div class="project-caption">Selected visual / LUMIO</div></div></article></div></section>
 <section class="section" id="connections"><div class="wrap reveal"><div class="section-heading"><div><div class="section-kicker">05 / Stay connected</div><h2>Find your way in.</h2></div><p class="section-intro">Start with a member's profile to find their available links, or explore the public project page.</p></div><div class="connections-panel"><div><h3>Follow the people behind the work.</h3><p>Personal socials live on each member profile.</p></div><div class="connection-links"><a href="#members"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20v-1.5a6.5 6.5 0 0 1 13 0V20M17 5.5a3.5 3.5 0 0 1 0 6.8M18 14a5.5 5.5 0 0 1 3.5 5.1V20"/></svg>Members</a><a href="https://github.com/dhisjwhd-svg/LUMIO-OS" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .8a11.2 11.2 0 0 0-3.54 21.83c.56.1.76-.24.76-.54v-2.1c-3.1.67-3.76-1.32-3.76-1.32-.51-1.3-1.24-1.65-1.24-1.65-1.02-.7.08-.69.08-.69 1.13.08 1.73 1.16 1.73 1.16 1 .1.76 2.06 3.77 1.56.1-.73.39-1.23.7-1.51-2.48-.28-5.09-1.24-5.09-5.53 0-1.22.44-2.22 1.16-3-.12-.29-.5-1.43.11-2.98 0 0 .95-.3 3.08 1.15a10.7 10.7 0 0 1 5.6 0c2.14-1.45 3.08-1.15 3.08-1.15.61 1.55.23 2.69.11 2.98.72.78 1.16 1.78 1.16 3 0 4.3-2.62 5.24-5.12 5.52.4.35.75 1.03.75 2.08v3.08c0 .3.2.65.77.54A11.2 11.2 0 0 0 12 .8Z"/></svg>GitHub</a></div></div></div></section>
 </main>
 <footer class="footer"><div class="wrap footer-inner"><div class="footer-left"><span class="brand-mark" aria-hidden="true">✿</span>THE FORGED FLOWERS</div><div class="footer-note">Made with intention. Still growing.</div><a class="back-top" href="#home">Back to top ↑</a></div></footer>
