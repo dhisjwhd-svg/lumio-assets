@@ -6552,18 +6552,20 @@ function steamSetLaunchProgress(p, msg){
 }
 
 async function launchGame() {
-  // Open synchronously during the Play click so popup blockers permit it.
-  // Navigate the blank tab to the real game URL instead of fetching and rewriting
-  // its HTML, which breaks relative assets, modules, origin checks and game storage.
+  // Open the about:blank tab synchronously inside the real Play-button gesture.
+  // Load the game's HTML into that tab and set a base URL so relative assets,
+  // scripts, audio, fetches and navigation still resolve to the original game folder.
   if (!current || _steamLaunchBusy) return;
   _steamLaunchBusy = true;
 
   var game = current;
   var url = gameUrl(game);
-  var win = null;
+  var popup = null;
   var overlay = document.getElementById('launch-overlay');
+  var progressTimer = null;
 
   function finish() {
+    if (progressTimer) clearInterval(progressTimer);
     _steamLaunchBusy = false;
     if (overlay) overlay.classList.remove('show');
   }
@@ -6577,19 +6579,15 @@ async function launchGame() {
       toast('Skipped promo link');
       return;
     }
-
     url = new URL(url, document.baseURI).href;
     if (!/^https?:\/\//i.test(url)) {
       toast('This game has an invalid URL');
       return;
     }
 
-    // Do not await anything before this call: it must stay in the click gesture.
-    try {
-      win = window.open('about:blank', 'steam_game_' + String(game.id == null ? 'game' : game.id));
-    } catch (_) {}
-
-    if (!win) {
+    // No await before window.open: otherwise mobile/desktop browsers may block it.
+    try { popup = window.open('about:blank', '_blank'); } catch (_) {}
+    if (!popup) {
       toast('Popup blocked — allow pop-ups for Lumio and try again');
       return;
     }
@@ -6600,28 +6598,54 @@ async function launchGame() {
     try { render(); } catch (_) {}
 
     if (overlay) overlay.classList.add('show');
-    var title = document.getElementById('launchTitle');
-    if (title) title.textContent = game.name || 'Game';
-    steamSetLaunchProgress(75, 'Starting game…');
+    var titleEl = document.getElementById('launchTitle');
+    if (titleEl) titleEl.textContent = game.name || 'Game';
+    steamSetLaunchProgress(12, 'Fetching game…');
 
-    // A brief fallback page is replaced immediately by the actual game URL.
-    try {
-      var doc = win.document;
-      doc.open();
-      doc.write('<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Opening game…</title><style>html,body{height:100%;margin:0;background:#101820;color:#dbe5ed;font:14px system-ui;display:grid;place-items:center}.load{text-align:center}.dots{margin-top:12px;color:#66c0f4;letter-spacing:5px;animation:pulse .8s ease-in-out infinite alternate}@keyframes pulse{to{opacity:.35}}</style></head><body><main class="load">Opening ' + String(game.name || 'game').replace(/[&<>"]/g, function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}) + '<div class="dots">•••</div></main></body></html>');
-      doc.close();
-    } catch (_) {}
+    // Fetch only the HTML document. The browser then loads its dependencies itself.
+    var response = await fetch(url, { cache: 'no-cache', credentials: 'omit' });
+    if (!response.ok) throw new Error('Game HTML request failed (' + response.status + ')');
+    var html = await response.text();
+    if (!html || html.length < 40) throw new Error('Game HTML was empty');
 
-    win.location.replace(url);
+    // A base tag makes relative file paths resolve against the actual game URL.
+    var baseHref = url.substring(0, url.lastIndexOf('/') + 1);
+    var baseTag = '<base href="' + baseHref.replace(/&/g, '&amp;').replace(/"/g, '&quot;') + '">';
+    if (/<head\b[^>]*>/i.test(html)) {
+      if (/<base\b[^>]*>/i.test(html)) {
+        html = html.replace(/<base\b[^>]*>/i, baseTag);
+      } else {
+        html = html.replace(/<head\b([^>]*)>/i, '<head$1>' + baseTag);
+      }
+    } else if (/<html\b[^>]*>/i.test(html)) {
+      html = html.replace(/<html\b([^>]*)>/i, '<html$1><head>' + baseTag + '</head>');
+    } else {
+      html = '<!doctype html><html><head><meta charset="utf-8">' + baseTag + '</head><body>' + html + '</body></html>';
+    }
+
+    steamSetLaunchProgress(78, 'Starting game…');
+    if (popup.closed) throw new Error('The game tab was closed');
+
+    // Keep this document on about:blank; avoid adding a wrapper or a second
+    // script block. document.write runs the fetched game HTML in the blank tab.
+    popup.document.open();
+    popup.document.write(html);
+    popup.document.close();
+    try { popup.focus(); } catch (_) {}
     steamSetLaunchProgress(100, 'Running');
   } catch (error) {
-    console.error('[Steam] launch error', error);
-    toast('Could not launch game');
-    if (win && !win.closed) {
-      try { win.location.replace(url); } catch (_) {}
+    console.warn('[Steam] about:blank launch failed; falling back to direct game URL:', error);
+    // Some hosts deny cross-origin fetches. Still launch the real game rather than
+    // leaving the user with a loading page or source text.
+    if (popup && !popup.closed && url) {
+      try { popup.location.replace(url); }
+      catch (_) { try { window.open(url, '_blank'); } catch (_) {} }
+      toast('This game host requires direct loading; opened the game instead');
+    } else {
+      toast('Could not load this game. Check the game link and try again.');
     }
   } finally {
-    setTimeout(finish, 250);
+    setTimeout(finish, 350);
   }
 }
 
