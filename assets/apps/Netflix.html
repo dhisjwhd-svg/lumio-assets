@@ -5822,6 +5822,8 @@ body.ff-device-tablet #win-about .ff-about-layout{grid-template-columns:210px mi
   }
   function evalArrayLiteral(lit){
     if(!lit) return null;
+    // Module catalogs are JSON arrays; JSON.parse avoids compiling multi-megabyte poster data as JavaScript.
+    try { return JSON.parse(lit); } catch(jsonError) {}
     try { return (new Function('return (' + lit + ');'))(); }
     catch(e1){
       try { return (new Function('return (' + lit.replace(/,\s*([}\]])/g, '$1') + ');'))(); }
@@ -6256,6 +6258,23 @@ body.ff-device-tablet #win-about .ff-about-layout{grid-template-columns:210px mi
       });
   }
 
+  function autoImportRequestedModule(){
+    if(window.__ffAutoModuleStarted) return;
+    var moduleUrl='';
+    try { moduleUrl = new URL(window.location.href).searchParams.get('module') || ''; } catch(e){}
+    if(!moduleUrl) return;
+    try {
+      var target = new URL(moduleUrl);
+      if(target.protocol !== 'https:' || target.hostname !== 'raw.githubusercontent.com' ||
+         target.pathname !== '/dhisjwhd-svg/driven/main/yuki.html') {
+        setStatus('This built-in launcher only accepts the trusted Yuki module URL', true);
+        return;
+      }
+    } catch(e) { setStatus('Invalid module URL', true); return; }
+    window.__ffAutoModuleStarted = true;
+    importUrl(moduleUrl);
+  }
+
   function wire(){
     var map = [
       ['navImportModules', function(e){ e.preventDefault(); openImporter(); }],
@@ -6305,8 +6324,8 @@ body.ff-device-tablet #win-about .ff-about-layout{grid-template-columns:210px mi
       if(m && m.style.display==='flex') closeImporter();
     }
   });
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', function(){ wire(); updateModuleButton(); });
-  else { wire(); updateModuleButton(); }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', function(){ wire(); updateModuleButton(); autoImportRequestedModule(); });
+  else { wire(); updateModuleButton(); autoImportRequestedModule(); }
   setTimeout(function(){ wire(); updateModuleButton(); }, 400);
   setTimeout(function(){ wire(); updateModuleButton(); }, 1200);
 })();
