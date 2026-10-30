@@ -6419,10 +6419,7 @@ function __ffLoadFlixSeries(cb){
   var _flixView="home";
   var _flixCur=null;
   var _flixGrads=["linear-gradient(145deg,#7f1d1d,#1a1a24)","linear-gradient(145deg,#1e3a5f,#12121a)","linear-gradient(145deg,#3b1d6d,#14141c)","linear-gradient(145deg,#14532d,#12141a)","linear-gradient(145deg,#7c2d12,#1a1410)"];
-  function flixSpin(on){
-    var sp=$("flixSpin");if(!sp)return;
-    if(on)sp.classList.add("on");else sp.classList.remove("on");
-  }
+  function flixSpin(on){ var sp=$('flixSpin'); if(sp) sp.classList.remove('on'); }
   
   function flixHideAllPages(){
     ["flixHome","flixEps","flixDetail"].forEach(function(id){
@@ -7124,22 +7121,81 @@ function flixAdvanceStrategy(reason){
   flixPlayStrategy(P.strategies[P.strategyIndex]);
 }
 
-function flixStartPlayback(ep, seriesTitle, idx){
-  flixStopVideo();
-  window.__flixPlay.settled = false;
-  window.__flixPlay.ep = ep;
-  window.__flixPlay.seriesTitle = seriesTitle || '';
-  window.__flixPlay.idx = (typeof idx === 'number') ? idx : 0;
-  window.__flixPlay.lastId = String(ep.id || '').trim();
-  window.__flixPlay.strategies = flixBuildStrategies(ep);
-  window.__flixPlay.strategyIndex = 0;
-  window.__flixPlay.attempt = 0;
+function flixDirectEpisodeUrl(ep){
+  ep = ep || {};
+  var candidates = [ep.embed, ep.url, ep.src, ep.stream, ep.fileUrl, ep.preview, ep.id];
+  var raw = '';
+  for(var i=0;i<candidates.length;i++){
+    if(candidates[i] != null && String(candidates[i]).trim()){
+      raw = String(candidates[i]).trim();
+      break;
+    }
+  }
+  if(!raw || raw.indexOf('folder:') === 0) return '';
+  if(/^https?:\/\//i.test(raw)){
+    var driveId = '';
+    var m = raw.match(/drive\.google\.com\/file\/d\/([^/?#]+)/i);
+    if(m) driveId = m[1];
+    if(!driveId){
+      try { var parsed = new URL(raw); if(/drive\.google\.com$/i.test(parsed.hostname)) driveId = parsed.searchParams.get('id') || ''; } catch(e){}
+    }
+    if(driveId) return 'https://drive.google.com/file/d/' + encodeURIComponent(driveId) + '/preview';
+    return raw;
+  }
+  if(/^[A-Za-z0-9_-]{15,}$/.test(raw)) return 'https://drive.google.com/file/d/' + encodeURIComponent(raw) + '/preview';
+  return '';
+}
 
-  if(!window.__flixPlay.strategies.length){
-    flixShowRecover('Cannot play', 'Episode has no Drive id or stream URL.');
+function flixStartPlayback(ep, seriesTitle, idx){
+  var url = flixDirectEpisodeUrl(ep);
+  var video = $('flixVideo'), frame = $('flixFrame');
+  var wrap = $('flixEmbedWrap'), loading = $('flixPLoad'), recover = $('flixRecover');
+  if(!url){
+    if(recover){ recover.style.display = 'flex'; }
+    var msg = $('flixRecoverMsg');
+    if(msg) msg.textContent = 'This episode does not contain a usable Google Drive file link or video URL yet.';
     return;
   }
-  flixPlayStrategy(window.__flixPlay.strategies[0]);
+  window.__flixPlay = window.__flixPlay || {};
+  window.__flixPlay.ep = ep;
+  window.__flixPlay.seriesTitle = seriesTitle || '';
+  window.__flixPlay.idx = typeof idx === 'number' ? idx : 0;
+  window.__flixPlay.settled = true;
+  window.__flixPlay.directUrl = url;
+
+  if(loading) loading.style.display = 'none';
+  if(recover) recover.style.display = 'none';
+  if(video){
+    video.pause();
+    video.removeAttribute('src');
+    video.load();
+    video.style.display = 'none';
+  }
+  if(frame){
+    frame.onload = null;
+    frame.src = 'about:blank';
+  }
+  var isDirectVideo = /\.(mp4|webm|ogg)(?:[?#]|$)/i.test(url);
+  if(isDirectVideo && video){
+    if(wrap) wrap.style.display = 'none';
+    video.style.display = 'block';
+    video.src = url;
+    video.load();
+    var playResult = video.play();
+    if(playResult && playResult.catch) playResult.catch(function(){});
+  } else {
+    if(wrap) wrap.style.display = 'block';
+    if(frame){
+      frame.title = (ep.label || ep.name || 'Episode') + ' video';
+      frame.setAttribute('allow','autoplay; encrypted-media; picture-in-picture; fullscreen');
+      frame.setAttribute('allowfullscreen','');
+      frame.src = url;
+    }
+  }
+  var topMask = document.querySelector('.flix-embed-mask-top');
+  var bottomMask = document.querySelector('.flix-embed-mask-bot');
+  if(topMask) topMask.style.display = 'none';
+  if(bottomMask) bottomMask.style.display = 'none';
 }
 
 
@@ -7176,45 +7232,41 @@ function flixStartPlayback(ep, seriesTitle, idx){
 })();
 
 function playFlixItem(ep, seriesTitle, idx){
-  if(!ep || !ep.id) return;
+  if(!ep) return;
   try{ nflxClick(); }catch(e){}
   if(typeof idx === 'number') _flixEpIndex = idx;
-  flixSpin(true);
-  setTimeout(function(){
-    if(String(ep.id).indexOf('folder:') === 0){
-      toast('This item is a folder, not a video');
-      flixSpin(false);
-      return;
-    }
-    _flixExtUrl = '';
-    hideFlixLayers();
-    var pl = $("flixPlayer"), title = $("flixPTitle"), ser = $("flixPSeries");
-    if(title) title.textContent = (seriesTitle ? seriesTitle + ' · ' : '') + (ep.label || ep.name || 'Episode');
-    if(ser) ser.textContent = (_flixCur && _flixCur.title) ? _flixCur.title : 'Episodes';
-    if(pl){
-      pl.classList.add('on');
-      var root = $("flix");
-      if(root) root.classList.add('watching');
-    }
-    if(_flixCur){
-      try{ renderFlixPlayerList(_flixCur, _flixEpIndex); }catch(e){}
-      try{
-        var up = $("yukiUpNext"), ut = $("yukiUpTitle"), um = $("yukiUpMeta"), ub = $("yukiUpPlay");
-        var nextEp = (_flixCur.eps && _flixCur.eps[_flixEpIndex + 1]) ? _flixCur.eps[_flixEpIndex + 1] : null;
-        if(up){
-          if(nextEp){
-            up.classList.add('on');
-            if(ut) ut.textContent = 'Up next · ' + (nextEp.label || nextEp.name || '');
-            if(um) um.textContent = _flixCur.title || '';
-            if(ub) ub.onclick = function(){ playFlixItem(nextEp, _flixCur.title, _flixEpIndex + 1); };
-          } else up.classList.remove('on');
-        }
-      }catch(e){}
-    }
-    flixStartPlayback(ep, seriesTitle, idx);
-    flixSpin(false);
-    toast('Playing');
-  }, 120);
+  if(String(ep.id || '').indexOf('folder:') === 0){
+    toast('This item is a folder, not a video');
+    return;
+  }
+  _flixExtUrl = '';
+  hideFlixLayers();
+  var pl = $('flixPlayer'), title = $('flixPTitle'), ser = $('flixPSeries');
+  if(title) title.textContent = (seriesTitle ? seriesTitle + ' · ' : '') + (ep.label || ep.name || 'Episode');
+  if(ser) ser.textContent = (_flixCur && _flixCur.title) ? _flixCur.title : 'Episodes';
+  if(pl){
+    pl.classList.add('on');
+    var root = $('flix');
+    if(root) root.classList.add('watching');
+  }
+  if(_flixCur){
+    try{ renderFlixPlayerList(_flixCur, _flixEpIndex); }catch(e){}
+    try{
+      var up = $('yukiUpNext'), ut = $('yukiUpTitle'), um = $('yukiUpMeta'), ub = $('yukiUpPlay');
+      var nextEp = (_flixCur.eps && _flixCur.eps[_flixEpIndex + 1]) ? _flixCur.eps[_flixEpIndex + 1] : null;
+      if(up){
+        if(nextEp){
+          up.classList.add('on');
+          if(ut) ut.textContent = 'Up next · ' + (nextEp.label || nextEp.name || '');
+          if(um) um.textContent = _flixCur.title || '';
+          if(ub) ub.onclick = function(){ playFlixItem(nextEp, _flixCur.title, _flixEpIndex + 1); };
+        } else up.classList.remove('on');
+      }
+    }catch(e){}
+  }
+  flixStartPlayback(ep, seriesTitle, idx);
+  flixSpin(false);
+  toast('Opening episode');
 }
 
 // Recovery buttons (wired once)
