@@ -160,13 +160,14 @@ body{padding:36px 22px 70px}
 .music-seek::-moz-range-thumb{width:7px;height:7px;border-radius:50%;background:#fff5fb;border:2px solid var(--accent)}
 .music-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:9px}
 .music-state{color:#8f8292;font-size:8px;letter-spacing:.13em;text-transform:uppercase;white-space:nowrap}
-.music-volume-wrap{display:flex;align-items:center;gap:7px;color:#a99bad}
-.music-volume-icon{font-size:11px;line-height:1}
-.music-volume{width:76px;height:3px;margin:0;appearance:none;-webkit-appearance:none;border-radius:99px;background:linear-gradient(90deg,var(--accent) 65%,rgba(255,255,255,.16) 65%);cursor:pointer;accent-color:var(--accent)}
+.music-volume-wrap{display:flex;align-items:center;gap:9px;color:#a99bad}
+.music-mute{width:25px;height:25px;border:0;border-radius:7px;background:transparent;color:#e9dce9;font-size:14px;cursor:pointer;display:grid;place-items:center;transition:background .18s,transform .18s}
+.music-mute:hover{background:rgba(var(--accent-rgb),.16);transform:scale(1.08)}
+.music-volume{width:92px;height:4px;margin:0;appearance:none;-webkit-appearance:none;border-radius:99px;background:linear-gradient(90deg,var(--accent) 65%,rgba(255,255,255,.16) 65%);cursor:pointer;accent-color:var(--accent);touch-action:pan-y}
 .music-volume::-webkit-slider-thumb{appearance:none;width:8px;height:8px;border-radius:50%;background:#fff5fb;border:1.5px solid var(--accent)}
 .music-volume::-moz-range-thumb{width:6px;height:6px;border-radius:50%;background:#fff5fb;border:1.5px solid var(--accent)}
 @media(max-width:650px){.music-player{left:14px;bottom:12px;width:min(320px,calc(100vw - 28px));backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}}
-@media(max-width:380px){.music-player{padding:11px}.music-title{font-size:10px}.music-disc{width:38px;height:38px}.music-volume{width:58px}}
+@media(max-width:380px){.music-player{padding:11px}.music-title{font-size:10px}.music-disc{width:38px;height:38px}.music-volume{width:68px}}
 
 </style>
 </head>
@@ -190,10 +191,10 @@ body{padding:36px 22px 70px}
 <footer class="footer"><span class="profile-number">profile 001</span><span class="footer-brand">the forged flowers</span></footer>
 </div></main>
 <aside class="music-player" id="music-player" aria-label="Moon's profile music player" hidden>
-<div class="music-head"><span class="music-disc" aria-hidden="true"></span><div class="music-meta"><div class="music-title">From The Start — Live</div><div class="music-artist">LAUFEY · MOON'S PROFILE</div></div><div class="music-actions"><button class="music-mute" id="music-mute" type="button" aria-label="Unmute profile music" aria-pressed="true" title="Mute or unmute">◖</button><button class="music-toggle" id="music-toggle" type="button" aria-label="Play profile music" aria-pressed="false" title="Play or pause">▶</button></div></div>
-<div class="music-progress"><span id="music-current">0:00</span><input class="music-seek" id="music-seek" type="range" min="0" max="100" step=".1" value="0" aria-label="Seek through profile music"><span id="music-duration">0:00</span></div>
-<div class="music-bottom"><span class="music-state" id="music-state">AUTO-PLAY</span><label class="music-volume-wrap" aria-label="Music volume"><span class="music-volume-icon" aria-hidden="true">◖</span><input class="music-volume" id="music-volume" type="range" min="0" max="1" step=".01" value=".65" aria-label="Music volume"></label></div>
-<audio id="profile-audio" preload="auto" playsinline src="https://raw.githubusercontent.com/dhisjwhd-svg/lumio-assets/main/audios/9-%20From%20The%20Start%20-%20Live%20From%20La.mp3"></audio>
+<div class="music-head"><span class="music-disc" aria-hidden="true"></span><div class="music-meta"><div class="music-title">From The Start — Live</div><div class="music-artist">LAUFEY · MOON'S PROFILE</div></div><div class="music-actions"><button class="music-toggle" id="music-toggle" type="button" aria-label="Pause profile music" aria-pressed="true" title="Play or pause">Ⅱ</button></div></div>
+<div class="music-progress"><span id="music-current">0:00</span><input class="music-seek" id="music-seek" type="range" min="0" max="100" step=".1" value="0" aria-label="Seek through music"><span id="music-duration">0:00</span></div>
+<div class="music-bottom"><span class="music-state" id="music-state">AUTO-PLAY · LOOP</span><div class="music-volume-wrap"><button class="music-mute" id="music-mute" type="button" aria-label="Mute profile music" aria-pressed="false" title="Mute or unmute">🔊</button><input class="music-volume" id="music-volume" type="range" min="0" max="1" step=".01" value=".65" aria-label="Music volume"></div></div>
+<audio id="profile-audio" preload="auto" autoplay loop playsinline src="https://raw.githubusercontent.com/dhisjwhd-svg/lumio-assets/main/audios/9-%20From%20The%20Start%20-%20Live%20From%20La.mp3"></audio>
 </aside>
 <script>
 (()=>{'use strict';
@@ -224,15 +225,15 @@ if(ambient&&ctx){resizeAmbient();if(!reduced.matches)raf=requestAnimationFrame(d
 let active=0,busy=false;
 
 const music=$('profile-audio'),musicPanel=$('music-player'),musicToggle=$('music-toggle'),musicMute=$('music-mute'),musicSeek=$('music-seek'),musicCurrent=$('music-current'),musicDuration=$('music-duration'),musicVolume=$('music-volume'),musicState=$('music-state');
-music.volume=.65;
+music.volume=.65;music.loop=true;
 const clock=t=>{if(!Number.isFinite(t))return '0:00';const n=Math.floor(t);return Math.floor(n/60)+':'+String(n%60).padStart(2,'0')};
 function syncMusic(){const duration=music.duration||0,progress=duration?music.currentTime/duration*100:0;musicSeek.value=String(progress);musicSeek.style.background='linear-gradient(90deg,var(--accent) '+progress+'%,rgba(255,255,255,.16) '+progress+'%)';musicCurrent.textContent=clock(music.currentTime);musicDuration.textContent=clock(duration)}
-function syncVolume(){const value=music.muted?0:music.volume;musicVolume.value=String(value);musicVolume.style.background='linear-gradient(90deg,var(--accent) '+(value*100)+'%,rgba(255,255,255,.16) '+(value*100)+'%)';musicMute.textContent=(music.muted||music.volume===0)?'◖':'◗';musicMute.setAttribute('aria-label',(music.muted||music.volume===0)?'Unmute profile music':'Mute profile music');musicMute.setAttribute('aria-pressed',String(music.muted||music.volume===0))}
+function syncVolume(){const value=music.muted?0:music.volume;musicVolume.value=String(value);musicVolume.style.background='linear-gradient(90deg,var(--accent) '+(value*100)+'%,rgba(255,255,255,.16) '+(value*100)+'%)';musicMute.textContent=(music.muted||music.volume===0)?'🔇':'🔊';musicMute.setAttribute('aria-label',(music.muted||music.volume===0)?'Unmute profile music':'Mute profile music');musicMute.setAttribute('aria-pressed',String(music.muted||music.volume===0))}
 function syncPlayback(){const playing=!music.paused;musicToggle.textContent=playing?'Ⅱ':'▶';musicToggle.setAttribute('aria-label',playing?'Pause profile music':'Play profile music');musicToggle.setAttribute('aria-pressed',String(playing));if(musicState)musicState.textContent=playing?(music.muted?'PLAYING · MUTED':'PLAYING'):'PAUSED · TAP PLAY'}
 async function startProfileMusic(){if(active!==0)return;music.muted=false;music.volume=Number(musicVolume.value)||.65;syncVolume();try{await music.play();syncPlayback()}catch(error){music.muted=true;syncVolume();try{await music.play();syncPlayback();if(musicState)musicState.textContent='PLAYING · MUTED — UNMUTE ANYTIME'}catch(fallbackError){syncPlayback();if(musicState)musicState.textContent='TAP PLAY TO START'}}}
 musicToggle.addEventListener('click',async()=>{if(music.paused){try{await music.play()}catch(error){if(musicState)musicState.textContent='PLAYBACK BLOCKED · TAP AGAIN'}}else music.pause();syncPlayback()});
-musicMute.addEventListener('click',async()=>{if(music.paused){try{await music.play()}catch(error){if(musicState)musicState.textContent='TAP PLAY TO START';return}}music.muted=!music.muted;if(!music.muted&&music.volume===0){music.volume=.65;musicVolume.value='.65'}syncVolume();syncPlayback();if(musicState)musicState.textContent=music.muted?'PLAYING · MUTED':'PLAYING · SOUND ON'});
-musicVolume.addEventListener('input',()=>{music.volume=Number(musicVolume.value);music.muted=music.volume===0;syncVolume();syncPlayback();if(musicState)musicState.textContent=music.paused?'PAUSED':music.muted?'PLAYING · MUTED':'PLAYING · SOUND ON'});
+musicMute.addEventListener('click',async()=>{if(music.paused){try{await music.play()}catch(error){if(musicState)musicState.textContent='TAP PLAY TO START';return}}if(music.muted||music.volume===0){music.muted=false;if(music.volume===0)music.volume=.65}else music.muted=true;syncVolume();syncPlayback();if(musicState)musicState.textContent=music.muted?'PLAYING · MUTED · LOOP':'PLAYING · LOOP'});
+musicVolume.addEventListener('input',()=>{music.volume=Number(musicVolume.value);music.muted=music.volume===0;syncVolume();syncPlayback();if(musicState)musicState.textContent=music.paused?'PAUSED':music.muted?'PLAYING · MUTED · LOOP':'PLAYING · LOOP'});
 music.addEventListener('play',syncPlayback);music.addEventListener('pause',syncPlayback);music.addEventListener('volumechange',()=>{syncVolume();syncPlayback()});music.addEventListener('loadedmetadata',syncMusic);music.addEventListener('timeupdate',syncMusic);music.addEventListener('ended',()=>{music.currentTime=0;syncMusic();music.play().catch(()=>{if(musicState)musicState.textContent='TAP PLAY TO RESTART'})});
 musicSeek.addEventListener('input',()=>{if(Number.isFinite(music.duration)&&music.duration>0){music.currentTime=Number(musicSeek.value)/100*music.duration;syncMusic()}});
 syncVolume();syncPlayback();
