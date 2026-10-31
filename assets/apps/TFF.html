@@ -142,21 +142,31 @@ body{padding:36px 22px 70px}
 @media(hover:none),(pointer:coarse){.wallpaper:after{display:none}.profile{backdrop-filter:none;-webkit-backdrop-filter:none}}
 @media(prefers-reduced-motion:reduce){.wallpaper:after{display:none}}
 
-.music-player{position:fixed;z-index:8;left:22px;bottom:20px;width:min(330px,calc(100vw - 28px));padding:11px 12px 10px;border:1px solid rgba(var(--accent-rgb),.25);border-radius:14px;background:linear-gradient(145deg,rgba(24,20,29,.94),rgba(9,8,13,.94));box-shadow:0 18px 55px rgba(0,0,0,.48),inset 0 1px 0 rgba(255,255,255,.07);backdrop-filter:blur(18px) saturate(135%);-webkit-backdrop-filter:blur(18px) saturate(135%);transition:opacity .22s,transform .22s,border-color .2s; transform:translateY(0)}
+.music-player{position:fixed;z-index:8;left:22px;bottom:20px;width:min(352px,calc(100vw - 28px));padding:13px 14px 11px;border:1px solid rgba(var(--accent-rgb),.27);border-radius:15px;background:linear-gradient(145deg,rgba(25,21,30,.97),rgba(9,8,13,.97));box-shadow:0 20px 60px rgba(0,0,0,.52),0 0 26px rgba(var(--accent-rgb),.055),inset 0 1px 0 rgba(255,255,255,.09);backdrop-filter:blur(20px) saturate(140%);-webkit-backdrop-filter:blur(20px) saturate(140%);transition:opacity .22s,transform .22s,border-color .2s}
 .music-player[hidden]{display:none}
-.music-head{display:flex;align-items:center;gap:10px;min-width:0}
-.music-disc{width:38px;height:38px;flex:none;display:grid;place-items:center;border:1px solid rgba(var(--accent-rgb),.4);border-radius:10px;background:radial-gradient(circle at 50% 50%,#17121b 0 18%,var(--accent) 20% 25%,#17121b 27% 100%);color:var(--accent);font-size:13px;box-shadow:0 0 20px rgba(var(--accent-rgb),.09)}
-.music-meta{min-width:0;flex:1}.music-title{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#f4edf5;font-size:11px;font-weight:750}.music-artist{margin-top:3px;color:#938897;font-size:8px;letter-spacing:.13em}
-.music-actions{display:flex;align-items:center;gap:6px}
-.music-toggle,.music-mute{width:31px;height:31px;flex:none;display:grid;place-items:center;border:1px solid rgba(var(--accent-rgb),.34);border-radius:50%;background:rgba(var(--accent-rgb),.11);color:var(--accent);font-size:12px;cursor:pointer;transition:transform .18s,background .18s,border-color .18s}
-.music-toggle:hover,.music-mute:hover{transform:scale(1.06);background:rgba(var(--accent-rgb),.2);border-color:rgba(var(--accent-rgb),.6)}
-.music-toggle:focus-visible,.music-mute:focus-visible,.music-seek:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-.music-progress{display:flex;align-items:center;gap:8px;margin-top:10px;color:#827787;font:9px/1 Inter,sans-serif;font-variant-numeric:tabular-nums}
+.music-head{display:flex;align-items:center;gap:11px;min-width:0}
+.music-disc{position:relative;width:43px;height:43px;flex:none;display:grid;place-items:center;border:1px solid rgba(var(--accent-rgb),.42);border-radius:12px;background:radial-gradient(circle at 50% 50%,#f5ddec 0 4%,#17121b 5% 17%,var(--accent) 18% 21%,#17121b 22% 38%,#39303c 39% 41%,#111015 42% 100%);color:#fff;font-size:0;box-shadow:0 0 22px rgba(var(--accent-rgb),.11)}
+.music-disc:after{content:"♫";position:absolute;inset:0;display:grid;place-items:center;color:#f9eaf5;font-size:14px;text-shadow:0 1px 8px #000}
+.music-meta{min-width:0;flex:1}.music-title{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#f8f1f8;font-size:11px;font-weight:760;letter-spacing:.01em}.music-artist{margin-top:4px;color:#a69aa9;font-size:8px;letter-spacing:.14em}
+.music-actions{display:flex;align-items:center;gap:7px}
+.music-toggle,.music-mute{width:32px;height:32px;flex:none;display:grid;place-items:center;border:1px solid rgba(var(--accent-rgb),.36);border-radius:50%;background:rgba(var(--accent-rgb),.105);color:var(--accent);font-size:12px;cursor:pointer;transition:transform .18s,background .18s,border-color .18s}
+.music-toggle{background:var(--accent);color:#20151f;border-color:transparent;font-size:11px;font-weight:800;box-shadow:0 0 18px rgba(var(--accent-rgb),.17)}
+.music-toggle:hover,.music-mute:hover{transform:scale(1.06);background:rgba(var(--accent-rgb),.22);border-color:rgba(var(--accent-rgb),.65)}
+.music-toggle:hover{background:#f8d5e9;color:#20151f}
+.music-toggle:focus-visible,.music-mute:focus-visible,.music-seek:focus-visible,.music-volume:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.music-progress{display:flex;align-items:center;gap:8px;margin-top:12px;color:#918596;font:9px/1 Inter,sans-serif;font-variant-numeric:tabular-nums}
 .music-seek{width:100%;height:3px;margin:0;appearance:none;-webkit-appearance:none;border-radius:99px;background:linear-gradient(90deg,var(--accent) 0%,rgba(255,255,255,.16) 0%);cursor:pointer;accent-color:var(--accent)}
-.music-seek::-webkit-slider-thumb{appearance:none;width:9px;height:9px;border-radius:50%;background:#f8eaf5;border:2px solid var(--accent);box-shadow:0 0 9px rgba(var(--accent-rgb),.35)}
-.music-seek::-moz-range-thumb{width:7px;height:7px;border-radius:50%;background:#f8eaf5;border:2px solid var(--accent)}
-@media(max-width:650px){.music-player{left:14px;bottom:12px;width:min(310px,calc(100vw - 28px));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}}
-@media(max-width:380px){.music-player{padding:10px}.music-title{font-size:10px}.music-disc{width:34px;height:34px}}
+.music-seek::-webkit-slider-thumb{appearance:none;width:9px;height:9px;border-radius:50%;background:#fff5fb;border:2px solid var(--accent);box-shadow:0 0 9px rgba(var(--accent-rgb),.35)}
+.music-seek::-moz-range-thumb{width:7px;height:7px;border-radius:50%;background:#fff5fb;border:2px solid var(--accent)}
+.music-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:9px}
+.music-state{color:#8f8292;font-size:8px;letter-spacing:.13em;text-transform:uppercase;white-space:nowrap}
+.music-volume-wrap{display:flex;align-items:center;gap:7px;color:#a99bad}
+.music-volume-icon{font-size:11px;line-height:1}
+.music-volume{width:76px;height:3px;margin:0;appearance:none;-webkit-appearance:none;border-radius:99px;background:linear-gradient(90deg,var(--accent) 65%,rgba(255,255,255,.16) 65%);cursor:pointer;accent-color:var(--accent)}
+.music-volume::-webkit-slider-thumb{appearance:none;width:8px;height:8px;border-radius:50%;background:#fff5fb;border:1.5px solid var(--accent)}
+.music-volume::-moz-range-thumb{width:6px;height:6px;border-radius:50%;background:#fff5fb;border:1.5px solid var(--accent)}
+@media(max-width:650px){.music-player{left:14px;bottom:12px;width:min(320px,calc(100vw - 28px));backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}}
+@media(max-width:380px){.music-player{padding:11px}.music-title{font-size:10px}.music-disc{width:38px;height:38px}.music-volume{width:58px}}
 
 </style>
 </head>
@@ -179,9 +189,10 @@ body{padding:36px 22px 70px}
 <nav class="socials" id="socials" aria-label="Social connections"></nav>
 <footer class="footer"><span class="profile-number">profile 001</span><span class="footer-brand">the forged flowers</span></footer>
 </div></main>
-<aside class="music-player" id="music-player" aria-label="Moon's profile audio player" hidden>
-<div class="music-head"><span class="music-disc" aria-hidden="true">♫</span><div class="music-meta"><div class="music-title">From The Start — Live</div><div class="music-artist">NOW PLAYING ON MOON'S PROFILE</div></div><div class="music-actions"><button class="music-mute" id="music-mute" type="button" aria-label="Unmute profile music" aria-pressed="true">◖</button><button class="music-toggle" id="music-toggle" type="button" aria-label="Pause profile music" aria-pressed="false">▶</button></div></div>
+<aside class="music-player" id="music-player" aria-label="Moon's profile music player" hidden>
+<div class="music-head"><span class="music-disc" aria-hidden="true"></span><div class="music-meta"><div class="music-title">From The Start — Live</div><div class="music-artist">LAUFEY · MOON'S PROFILE</div></div><div class="music-actions"><button class="music-mute" id="music-mute" type="button" aria-label="Unmute profile music" aria-pressed="true" title="Mute or unmute">◖</button><button class="music-toggle" id="music-toggle" type="button" aria-label="Play profile music" aria-pressed="false" title="Play or pause">▶</button></div></div>
 <div class="music-progress"><span id="music-current">0:00</span><input class="music-seek" id="music-seek" type="range" min="0" max="100" step=".1" value="0" aria-label="Seek through profile music"><span id="music-duration">0:00</span></div>
+<div class="music-bottom"><span class="music-state" id="music-state">AUTO-PLAY · MUTED</span><label class="music-volume-wrap" aria-label="Music volume"><span class="music-volume-icon" aria-hidden="true">◖</span><input class="music-volume" id="music-volume" type="range" min="0" max="1" step=".01" value=".65" aria-label="Music volume"></label></div>
 <audio id="profile-audio" preload="auto" muted playsinline src="https://raw.githubusercontent.com/dhisjwhd-svg/lumio-assets/main/audios/9-%20From%20The%20Start%20-%20Live%20From%20La.mp3"></audio>
 </aside>
 <script>
@@ -212,18 +223,19 @@ if(ambient&&ctx){resizeAmbient();if(!reduced.matches)raf=requestAnimationFrame(d
 
 let active=0,busy=false;
 
-const music=$('profile-audio'),musicPanel=$('music-player'),musicToggle=$('music-toggle'),musicMute=$('music-mute'),musicSeek=$('music-seek'),musicCurrent=$('music-current'),musicDuration=$('music-duration');
+const music=$('profile-audio'),musicPanel=$('music-player'),musicToggle=$('music-toggle'),musicMute=$('music-mute'),musicSeek=$('music-seek'),musicCurrent=$('music-current'),musicDuration=$('music-duration'),musicVolume=$('music-volume'),musicState=$('music-state');
+music.volume=.65;
 const clock=t=>{if(!Number.isFinite(t))return '0:00';const n=Math.floor(t);return Math.floor(n/60)+':'+String(n%60).padStart(2,'0')};
 function syncMusic(){const duration=music.duration||0,progress=duration?music.currentTime/duration*100:0;musicSeek.value=String(progress);musicSeek.style.background='linear-gradient(90deg,var(--accent) '+progress+'%,rgba(255,255,255,.16) '+progress+'%)';musicCurrent.textContent=clock(music.currentTime);musicDuration.textContent=clock(duration)}
-function syncMute(){musicMute.textContent=music.muted?'◖':'◗';musicMute.setAttribute('aria-label',music.muted?'Unmute profile music':'Mute profile music');musicMute.setAttribute('aria-pressed',String(music.muted))}
-async function startProfileMusic(){if(active!==0)return;music.muted=true;try{await music.play();musicToggle.textContent='Ⅱ';musicToggle.setAttribute('aria-label','Pause profile music');musicToggle.setAttribute('aria-pressed','true');syncMute()}catch(error){musicToggle.textContent='▶';musicToggle.setAttribute('aria-label','Play profile music');musicToggle.setAttribute('aria-pressed','false')}}
-musicToggle.addEventListener('click',async()=>{if(music.paused){try{await music.play()}catch(error){musicToggle.textContent='↻';musicToggle.setAttribute('aria-label','Retry playing profile music')}}else music.pause()});
-musicMute.addEventListener('click',async()=>{if(music.paused){try{await music.play()}catch(error){musicToggle.textContent='▶';return}}music.muted=!music.muted;syncMute()});
-music.addEventListener('play',()=>{musicToggle.textContent='Ⅱ';musicToggle.setAttribute('aria-label','Pause profile music');musicToggle.setAttribute('aria-pressed','true')});
-music.addEventListener('pause',()=>{musicToggle.textContent='▶';musicToggle.setAttribute('aria-label','Play profile music');musicToggle.setAttribute('aria-pressed','false')});
-music.addEventListener('volumechange',syncMute);music.addEventListener('loadedmetadata',syncMusic);music.addEventListener('timeupdate',syncMusic);music.addEventListener('ended',()=>{music.currentTime=0;syncMusic();music.play().catch(()=>{})});
+function syncVolume(){const value=music.muted?0:music.volume;musicVolume.value=String(value);musicVolume.style.background='linear-gradient(90deg,var(--accent) '+(value*100)+'%,rgba(255,255,255,.16) '+(value*100)+'%)';musicMute.textContent=(music.muted||music.volume===0)?'◖':'◗';musicMute.setAttribute('aria-label',(music.muted||music.volume===0)?'Unmute profile music':'Mute profile music');musicMute.setAttribute('aria-pressed',String(music.muted||music.volume===0))}
+function syncPlayback(){const playing=!music.paused;musicToggle.textContent=playing?'Ⅱ':'▶';musicToggle.setAttribute('aria-label',playing?'Pause profile music':'Play profile music');musicToggle.setAttribute('aria-pressed',String(playing));if(musicState)musicState.textContent=playing?(music.muted?'PLAYING · MUTED':'PLAYING'):'PAUSED · TAP PLAY'}
+async function startProfileMusic(){if(active!==0)return;music.muted=true;syncVolume();try{await music.play();syncPlayback()}catch(error){syncPlayback();if(musicState)musicState.textContent='TAP PLAY TO START'}}
+musicToggle.addEventListener('click',async()=>{if(music.paused){try{await music.play()}catch(error){if(musicState)musicState.textContent='PLAYBACK BLOCKED · TAP AGAIN'}}else music.pause();syncPlayback()});
+musicMute.addEventListener('click',async()=>{if(music.paused){try{await music.play()}catch(error){if(musicState)musicState.textContent='TAP PLAY TO START';return}}music.muted=!music.muted;if(!music.muted&&music.volume===0){music.volume=.65;musicVolume.value='.65'}syncVolume();syncPlayback()});
+musicVolume.addEventListener('input',()=>{music.volume=Number(musicVolume.value);music.muted=music.volume===0;syncVolume();syncPlayback()});
+music.addEventListener('play',syncPlayback);music.addEventListener('pause',syncPlayback);music.addEventListener('volumechange',()=>{syncVolume();syncPlayback()});music.addEventListener('loadedmetadata',syncMusic);music.addEventListener('timeupdate',syncMusic);music.addEventListener('ended',()=>{music.currentTime=0;syncMusic();music.play().catch(()=>{if(musicState)musicState.textContent='TAP PLAY TO RESTART'})});
 musicSeek.addEventListener('input',()=>{if(Number.isFinite(music.duration)&&music.duration>0){music.currentTime=Number(musicSeek.value)/100*music.duration;syncMusic()}});
-syncMute();
+syncVolume();syncPlayback();
 
 function setImage(img,url,alt){img.onerror=null;img.alt=alt;img.decoding='async';img.loading='eager';img.fetchPriority='high';img.onerror=()=>{if(url.includes('cdn.jsdelivr.net/gh/dhisjwhd-svg/lumio-assets@main/')){img.onerror=null;img.src=url.replace('https://raw.githubusercontent.com/dhisjwhd-svg/lumio-assets/main/','https://raw.githubusercontent.com/dhisjwhd-svg/lumio-assets/main/');}};if(img.src!==url)img.src=url}
 function render(index){const m=members[index];musicPanel.hidden=index!==0;if(index!==0){music.pause();music.currentTime=0;syncMusic()}else{startProfileMusic()}document.body.style.setProperty('--accent',index===1?'#d8b0f2':index===2?'#f4c66a':'#f1b9d8');document.body.style.setProperty('--accent-rgb',index===1?'216,176,242':index===2?'244,198,106':'241,185,216');$('name').textContent=m.name;$('handle').textContent=m.handle;const bio=$('bio');const quoteIndex=m.bio.indexOf('\n“');if(quoteIndex>=0){bio.replaceChildren(document.createTextNode(m.bio.slice(0,quoteIndex+1)));const quote=document.createElement('span');quote.className='quote';quote.textContent=m.bio.slice(quoteIndex+1);bio.append(quote)}else bio.textContent=m.bio;setImage($('banner'),m.banner,m.name+' cover');setImage($('avatar'),m.avatar,m.name+' profile picture');$('role').textContent=index===0?'personal page':index===2?'sunflower member':'member profile';$('member-status').textContent='profile 00'+(index+1);$('socials').classList.toggle('single',m.links.length===1);document.querySelector('.section-top').hidden=m.links.length===0;$('socials').hidden=m.links.length===0;$('connection-note').textContent=m.links.length===1?'1 social profile':'social profiles';$('socials').innerHTML=m.links.map(l=>'<a class="social" href="'+l.url+'" target="_blank" rel="noopener noreferrer" aria-label="'+l.label+'">'+icons[l.icon]+'<span>'+l.label+'</span></a>').join('');document.querySelector('.profile-number').textContent='profile 00'+(index+1);prev.hidden=index===0;next.hidden=index===members.length-1;document.title=m.name+' — The Forged Flowers'}
