@@ -6444,7 +6444,7 @@ function steamAdBlockInject(){
     "var B=new Set(['doubleclick.net','googlesyndication','googleadservices','adservice.google','pagead2.googlesyndication','adsystem','amazon-adsystem','adnxs.com','adsrvr.org','advertising.com','adform.net','admob','ads.yahoo','scorecardresearch','quantserve','outbrain','taboola','criteo','moatads','pubmatic','openx','rubiconproject','casalemedia','facebook.net/tr','hotjar','clarity.ms','popads','popcash','propellerads','exoclick','adsterra','mgid','revcontent','juicyads','exosrv','trafficjunky']);" +
     "function blocked(url){if(!url)return false;var u=String(url).toLowerCase();for(var x of B){if(u.indexOf(x)!==-1)return true;}return false;}" +
     "try{var c=document.createElement('style');c.textContent='iframe[src*=\"doubleclick\"],iframe[src*=\"googlesyndication\"],iframe[src*=\"adservice\"],iframe[id*=\"google_ads\"],iframe[class*=\"adsbox\"],div[id*=\"google_ads\"],div[class*=\"adsbygoogle\"],ins.adsbygoogle,.ad-container,.ad-banner,.adsbox,[data-ad],[data-ad-client],#ads,#ad,#banner-ad,.advertisement,[class*=\"AdWidget\"]{display:none!important;visibility:hidden!important;pointer-events:none!important;width:0!important;height:0!important;overflow:hidden!important}';(document.head||document.documentElement).appendChild(c);}catch(e){}" +
-    "try{var o=window.open;window.open=function(u,n,s){if(blocked(u)||!u||u==='about:blank')return null;try{return o.call(window,u,n,s);}catch(e){return null;}};}catch(e){}" +
+    "try{var o=window.open;window.open=function(u,n,s){if(blocked(u))return null;try{return o.call(window,u,n,s);}catch(e){return null;}};}catch(e){}" +
     "try{if(window.fetch){var f=window.fetch;window.fetch=function(i,n){var u=typeof i==='string'?i:(i&&i.url);if(blocked(u))return Promise.reject(new Error('blocked'));return f.apply(this,arguments);};}}catch(e){}" +
     "function scrub(n){if(!n||n.nodeType!==1)return;try{var t=(n.tagName||'').toUpperCase();if(t==='SCRIPT'){var s=n.src||n.getAttribute('src')||'';if(blocked(s)||/adsbygoogle|google_ad|popunder|ad-provider/i.test(s+(n.textContent||'').slice(0,160))){n.remove();return;}}if(t==='IFRAME'||t==='INS'){var u=n.src||n.getAttribute('src')||n.getAttribute('data-ad-client')||'';if(blocked(u)||(t==='INS'&&n.classList&&n.classList.contains('adsbygoogle'))){n.remove();return;}}if(n.id&&/^(ad|ads|google_ads|banner)/i.test(n.id))n.style.setProperty('display','none','important');}catch(e){}}" +
     "function scan(r){try{(r||document).querySelectorAll('script,iframe,ins').forEach(scrub);}catch(e){}}scan(document);" +
@@ -6552,103 +6552,50 @@ function steamSetLaunchProgress(p, msg){
 }
 
 async function launchGame() {
-  // Open the about:blank tab synchronously inside the real Play-button gesture.
-  // Load the game's HTML into that tab and set a base URL so relative assets,
-  // scripts, audio, fetches and navigation still resolve to the original game folder.
+  // Open about:blank synchronously in the Play-button gesture so popup blockers allow it.
   if (!current || _steamLaunchBusy) return;
   _steamLaunchBusy = true;
-
-  var game = current;
-  var url = gameUrl(game);
-  var popup = null;
+  var game = current, url = gameUrl(current), popup = null;
   var overlay = document.getElementById('launch-overlay');
-  var progressTimer = null;
-
-  function finish() {
-    if (progressTimer) clearInterval(progressTimer);
-    _steamLaunchBusy = false;
-    if (overlay) overlay.classList.remove('show');
+  var finished = false;
+  function finish(){ if(finished)return; finished=true; _steamLaunchBusy=false; if(overlay)overlay.classList.remove('show'); }
+  function popupStatus(message){
+    if(!popup || popup.closed)return;
+    try { popup.document.open(); popup.document.write('<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+esc(game.name||'Game')+'</title><style>html,body{margin:0;min-height:100%;background:#101820;color:#dbe5ed;font:14px system-ui;display:grid;place-items:center}main{text-align:center;padding:28px}p{color:#9aa9b7}</style></head><body><main><h2>'+esc(game.name||'Launching game')+'</h2><p>'+esc(message)+'</p></main></body></html>'); popup.document.close(); } catch(e){}
   }
-
   try {
-    if (!url) {
-      toast('This game has no playable URL');
-      return;
-    }
-    if (/discord\.(gg|com)/i.test(url) || (game.id != null && Number(game.id) < 0)) {
-      toast('Skipped promo link');
-      return;
-    }
-    url = new URL(url, document.baseURI).href;
-    if (!/^https?:\/\//i.test(url)) {
-      toast('This game has an invalid URL');
-      return;
-    }
-
-    // No await before window.open: otherwise mobile/desktop browsers may block it.
-    try { popup = window.open('about:blank', '_blank'); } catch (_) {}
-    if (!popup) {
-      toast('Popup blocked — allow pop-ups for Lumio and try again');
-      return;
-    }
-
-    try { if (typeof sfx === 'function') sfx('launch'); } catch (_) {}
-    try { if (typeof stopMenuMusic === 'function') stopMenuMusic(); } catch (_) {}
-    try { addRecent(game.id); } catch (_) {}
-    try { render(); } catch (_) {}
-
-    if (overlay) overlay.classList.add('show');
-    var titleEl = document.getElementById('launchTitle');
-    if (titleEl) titleEl.textContent = game.name || 'Game';
-    steamSetLaunchProgress(12, 'Fetching game…');
-
-    // Fetch only the HTML document. The browser then loads its dependencies itself.
-    var response = await fetch(url, { cache: 'no-cache', credentials: 'omit' });
-    if (!response.ok) throw new Error('Game HTML request failed (' + response.status + ')');
-    var html = await response.text();
-    if (!html || html.length < 40) throw new Error('Game HTML was empty');
-
-    // A base tag makes relative file paths resolve against the actual game URL.
-    var baseHref = url.substring(0, url.lastIndexOf('/') + 1);
-    var baseTag = '<base href="' + baseHref.replace(/&/g, '&amp;').replace(/"/g, '&quot;') + '">';
-    // Some games intentionally use a CDN <base> URL (for example, packaged
-    // YouTube Playables). Preserve that base exactly; only supply one when absent.
-    if (!/<base\b[^>]*>/i.test(html)) {
-      if (/<head\b[^>]*>/i.test(html)) {
-        html = html.replace(/<head\b([^>]*)>/i, '<head$1>' + baseTag);
-      } else if (/<html\b[^>]*>/i.test(html)) {
-        html = html.replace(/<html\b([^>]*)>/i, '<html$1><head>' + baseTag + '</head>');
-      } else {
-        html = '<!doctype html><html><head><meta charset="utf-8">' + baseTag + '</head><body>' + html + '</body></html>';
-      }
-    }
-
-    steamSetLaunchProgress(78, 'Starting game…');
-    if (popup.closed) throw new Error('The game tab was closed');
-
-    // Keep this document on about:blank; avoid adding a wrapper or a second
-    // script block. document.write runs the fetched game HTML in the blank tab.
-    popup.document.open();
-    popup.document.write(html);
-    popup.document.close();
-    try { popup.focus(); } catch (_) {}
-    steamSetLaunchProgress(100, 'Running');
-  } catch (error) {
-    console.warn('[Steam] about:blank launch failed; falling back to direct game URL:', error);
-    // Some hosts deny cross-origin fetches. Still launch the real game rather than
-    // leaving the user with a loading page or source text.
-    if (popup && !popup.closed && url) {
-      try { popup.location.replace(url); }
-      catch (_) { try { window.open(url, '_blank'); } catch (_) {} }
-      toast('This game host requires direct loading; opened the game instead');
-    } else {
-      toast('Could not load this game. Check the game link and try again.');
-    }
-  } finally {
-    setTimeout(finish, 350);
-  }
+    if(!url){toast('This game has no playable URL');return;}
+    if(/discord\.(gg|com)/i.test(url)||(game.id!=null&&Number(game.id)<0)){toast('Skipped promo link');return;}
+    url=new URL(url,document.baseURI).href;
+    if(!/^https?:\/\//i.test(url)){toast('This game has an invalid URL');return;}
+    // No await before window.open: delayed opens are commonly blocked on mobile.
+    try{popup=window.open('about:blank','_blank');}catch(e){}
+    if(!popup){toast('Popup blocked — allow pop-ups for Lumio and try again');return;}
+    popupStatus('Preparing game…');
+    try{if(typeof sfx==='function')sfx('launch');}catch(e){}
+    try{if(typeof stopMenuMusic==='function')stopMenuMusic();}catch(e){}
+    try{addRecent(game.id);render();}catch(e){}
+    if(overlay)overlay.classList.add('show');
+    var titleEl=document.getElementById('launchTitle'); if(titleEl)titleEl.textContent=game.name||'Game';
+    steamSetLaunchProgress(12,'Loading game files…');
+    // Uses the bounded network fetch + in-memory cache; direct URL fallback handles CORS-restricted hosts.
+    var html=await steamFetchGameHtml(url);
+    if(!html||html.length<20)throw new Error('Game HTML was empty');
+    var baseHref=url.substring(0,url.lastIndexOf('/')+1);
+    html=steamStripAdsFromHtml(html,baseHref);
+    steamSetLaunchProgress(82,'Starting game…');
+    if(!popup||popup.closed)throw new Error('The game tab was closed');
+    popup.document.open(); popup.document.write(html); popup.document.close();
+    try{popup.document.title=game.name||'Game';popup.focus();}catch(e){}
+    steamSetLaunchProgress(100,'Running');
+  } catch(error) {
+    console.warn('[Steam] HTML launch unavailable; opening original game URL:',error);
+    if(popup&&!popup.closed&&url){
+      try{popup.location.replace(url);}catch(e){try{popup.location.href=url;}catch(e2){}}
+      toast('This game needs direct hosting — opening its original game page');
+    } else { toast('Could not launch this game. Try again or check the game link.'); }
+  } finally { setTimeout(finish,500); }
 }
-
 
 // Wire minimize on window close buttons in top chrome
 
