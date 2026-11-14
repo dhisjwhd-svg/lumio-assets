@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#100d19">
+<title>Moonflower Anime Archive</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+:root{color-scheme:dark;--bg:#100d19;--panel:#191526;--panel2:#211b30;--line:#ffffff14;--muted:#aaa2b9;--text:#f8f3ff;--pink:#ff8dbb;--violet:#b49aff;--cyan:#8be5e8;--gold:#ffd99a}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 78% 0%,#382444 0,transparent 35%),radial-gradient(ellipse at 5% 22%,#202344 0,transparent 34%),var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh}button,input{font:inherit}a{color:inherit;text-decoration:none}.shell{max-width:1440px;margin:auto;padding:0 34px}.topbar{height:76px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);position:relative;z-index:2}.brand{display:flex;align-items:center;gap:12px;font-family:Outfit,sans-serif;font-weight:800;letter-spacing:-.6px;font-size:20px}.brand-mark{width:38px;height:38px;border-radius:13px;background:linear-gradient(145deg,#ff9cc5,#a48cff);display:grid;place-items:center;color:#27152e;font-size:21px;box-shadow:0 8px 30px #e887ba35}.brand small{display:block;font:500 10px 'DM Sans';letter-spacing:2px;color:var(--muted);margin-top:1px}.nav{display:flex;gap:26px;color:#c9c0d3;font-size:13px}.nav a:hover{color:var(--pink)}.top-right{display:flex;align-items:center;gap:10px}.pill{border:1px solid var(--line);border-radius:999px;padding:9px 13px;color:#d9d1e1;font-size:12px;background:#ffffff08}.hero{padding:64px 0 36px;display:grid;grid-template-columns:1.25fr .75fr;gap:30px;align-items:center}.eyebrow{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--pink);font-weight:700}.hero h1{font:800 clamp(42px,6vw,76px)/.98 Outfit,sans-serif;letter-spacing:-3px;margin:17px 0 18px;max-width:780px}.hero h1 span{background:linear-gradient(90deg,#ff9dc5,#c0a4ff 55%,#8be5e8);-webkit-background-clip:text;background-clip:text;color:transparent}.hero p{max-width:580px;color:#bcb4c8;line-height:1.75;font-size:14px;margin:0}.hero-actions{display:flex;gap:10px;margin-top:25px;flex-wrap:wrap}.primary,.secondary{border:0;border-radius:12px;padding:13px 17px;font-weight:700;font-size:13px;cursor:pointer}.primary{background:linear-gradient(100deg,#ff9dc5,#b69cff);color:#25152c;box-shadow:0 10px 28px #c17acb30}.secondary{background:#ffffff0c;border:1px solid var(--line);color:#eee8f6}.hero-art{height:285px;border:1px solid #ffffff20;border-radius:26px;position:relative;overflow:hidden;background:linear-gradient(140deg,#352345,#1e2442 55%,#2d2944);box-shadow:0 25px 70px #0005}.hero-art:before{content:"";position:absolute;width:270px;height:270px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff5d5,#ffb6d2 40%,#a987d9 72%,transparent 73%);right:35px;top:12px;filter:drop-shadow(0 0 35px #ffb5d877)}.hero-art:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#171323e8,transparent 60%),radial-gradient(ellipse at 15% 85%,#fa8ab244,transparent 35%)}.art-copy{position:absolute;z-index:1;left:25px;bottom:22px}.art-copy strong{font:700 25px Outfit}.art-copy small{display:block;color:#d0c3dc;margin-top:5px;letter-spacing:1.5px;font-size:10px}.petal{position:absolute;z-index:1;color:#ffb7d2;font-size:23px;opacity:.8}.p1{top:22px;left:35px}.p2{right:22px;top:65px;font-size:16px}.p3{left:45%;top:38px;font-size:14px}.p4{right:38%;bottom:70px;font-size:18px}.stats{display:flex;gap:28px;margin-top:30px}.stat b{font:700 21px Outfit;display:block}.stat span{font-size:10px;letter-spacing:1.5px;color:var(--muted);text-transform:uppercase}.section-head{display:flex;align-items:end;justify-content:space-between;gap:18px;margin:35px 0 18px}.section-head h2{font:700 25px Outfit;margin:0;letter-spacing:-.5px}.section-head p{color:var(--muted);font-size:12px;margin:5px 0 0}.tools{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.search{position:relative}.search input{width:min(290px,70vw);background:#ffffff0b;border:1px solid var(--line);border-radius:12px;color:white;padding:12px 14px 12px 38px;outline:none}.search input:focus{border-color:#d49bc9}.search span{position:absolute;left:13px;top:10px;color:#a99fb5}.filters{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 22px}.filter{border:1px solid var(--line);background:#ffffff08;color:#c8bfd1;padding:9px 14px;border-radius:999px;font-size:11px;cursor:pointer;transition:.2s}.filter.active,.filter:hover{background:#f39bc31b;border-color:#ef9bc3;color:#ffc3dc}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}.card{min-height:180px;border:1px solid var(--line);border-radius:17px;padding:16px;background:linear-gradient(145deg,#ffffff0b,#ffffff04);position:relative;overflow:hidden;display:flex;flex-direction:column;transition:transform .22s,border-color .22s,background .22s}.card:hover{transform:translateY(-4px);border-color:#e5a5d155;background:linear-gradient(145deg,#ffffff12,#ffffff06)}.card:after{content:"";position:absolute;width:115px;height:115px;border-radius:50%;right:-44px;top:-52px;background:var(--glow,#ff9dc5);opacity:.13;filter:blur(2px)}.card-top{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1}.poster{height:37px;width:37px;border-radius:12px;display:grid;place-items:center;background:var(--poster,linear-gradient(135deg,#f5a5c8,#aa9cff));color:#24162c;font:800 15px Outfit;box-shadow:0 6px 18px #0003}.tag{font-size:9px;text-transform:uppercase;letter-spacing:1px;color:#d4c5e3;background:#ffffff0b;border:1px solid var(--line);border-radius:99px;padding:6px 8px}.card h3{font:700 16px/1.25 Outfit;margin:17px 0 6px;position:relative;z-index:1}.card .meta{font-size:11px;color:#a99fb5;position:relative;z-index:1}.card-bottom{margin-top:auto;padding-top:18px;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1}.open{font-size:11px;font-weight:700;color:#ffb6d1}.open span{margin-left:5px}.save{border:1px solid var(--line);background:#ffffff08;color:#c9bfd3;width:29px;height:29px;border-radius:9px;cursor:pointer}.save.saved{color:#ff9dc5;border-color:#ff9dc566;background:#ff9dc51a}.empty{display:none;text-align:center;padding:55px 15px;color:var(--muted);border:1px dashed var(--line);border-radius:18px}.notice{margin:30px 0 42px;padding:18px 20px;border:1px solid #ffd99a33;border-radius:15px;background:#ffd99a0b;color:#d9c9ad;font-size:11px;line-height:1.7}.notice strong{color:#ffe1aa}.footer{border-top:1px solid var(--line);padding:24px 0 34px;display:flex;justify-content:space-between;gap:20px;color:#8f879d;font-size:11px}.footer b{color:#d9cde4}.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#2a2237;border:1px solid #ffffff24;border-radius:12px;padding:11px 16px;font-size:12px;z-index:5;transition:.25s}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:1050px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.hero{grid-template-columns:1fr .8fr}}@media(max-width:760px){.shell{padding:0 18px}.nav{display:none}.hero{grid-template-columns:1fr;padding-top:45px}.hero-art{height:210px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.hero h1{letter-spacing:-2px}.stats{gap:18px}}@media(max-width:470px){.grid{grid-template-columns:1fr}.section-head{align-items:start;flex-direction:column}.tools{width:100%}.search,.search input{width:100%}.top-right .pill:first-child{display:none}.hero h1{font-size:48px}.footer{flex-direction:column}}
+</style>
+</head>
+<body>
+<header class="shell topbar">
+ <a class="brand" href="#"><span class="brand-mark">✿</span><span>moonflower<small>ANIME ARCHIVE</small></span></a>
+ <nav class="nav"><a href="#library">Library</a><a href="#about">About</a><a href="#request">Request</a></nav>
+ <div class="top-right"><span class="pill">✦ Curated collection</span><span class="pill">LUMIO / 01</span></div>
+</header>
+<main class="shell">
+ <section class="hero">
+  <div><div class="eyebrow">✿ your next watch starts here</div><h1>A little world of <span>anime.</span></h1><p>A clean, cozy directory for the shows and films in your collection. Browse by title, filter by mood, save favorites, and jump to the linked folders.</p>
+   <div class="hero-actions"><a class="primary" href="#library">Explore the library ↗</a><a class="secondary" href="#request">Request a title</a></div>
+   <div class="stats"><div class="stat"><b id="totalCount">0</b><span>Titles & collections</span></div><div class="stat"><b>01</b><span>Little archive</span></div><div class="stat"><b>✿</b><span>Made for Lumio</span></div></div>
+  </div>
+  <div class="hero-art" aria-label="Abstract moon and cherry blossom artwork"><span class="petal p1">✿</span><span class="petal p2">✧</span><span class="petal p3">✿</span><span class="petal p4">✧</span><div class="art-copy"><strong>夜空の図書館</strong><small>THE NIGHT-SKY LIBRARY · EST. 2026</small></div></div>
+ </section>
+ <section id="library">
+  <div class="section-head"><div><div class="eyebrow">the collection</div><h2>Find your next series</h2><p>Search titles or narrow the library down by genre.</p></div><div class="tools"><label class="search"><span>⌕</span><input id="search" type="search" placeholder="Search the library..." autocomplete="off"></label></div></div>
+  <div class="filters" id="filters"></div>
+  <div class="grid" id="grid"></div>
+  <div class="empty" id="empty">No titles found. Try another search ✿</div>
+ </section>
+ <section id="about" class="notice"><strong>✦ A quick note</strong><br>These cards are a directory of external Google Drive folders supplied for this page; they do not host or play video. Folder access and availability are controlled by the folder owners. Please make sure you have permission to access and view any linked material, and choose age-appropriate titles.</section>
+ <section id="request" class="notice"><strong>✿ Have an anime request?</strong><br>Send a title suggestion through the request form: <a href="https://docs.google.com/forms/d/e/1FAIpQLScjnVySwMCIorHqnhrDz3sXnNjs5Hm0VThg1ScarPAm5xk6UA/viewform" target="_blank" rel="noopener">open the anime request form ↗</a></section>
+</main>
+<footer class="shell footer"><span><b>moonflower</b> · anime archive</span><span>Part of the Lumio universe ✿</span><span>Single-file edition · 2026</span></footer>
+<div class="toast" id="toast"></div>
+<script>
+const titles = [
+["Shikanoko Nokonoko Koshitantan","Comedy","1wLa94fdNpe9uFoLRZstYSIOg7fgsJOID"],
+["Sakamoto Days","Action","10q57cininxNnxpDc9aLtCVjcDgFB0rzd"],
+["Death Note 1080p Dual Audio Bluray HEVC","Thriller","166tNe4UUWgYROWK4DwhtZKxgrpFZZAm5"],
+["Assassination Classroom","Action","1T-JYKyNVjYjwzEmTDr6kErnlSlnT-I2X"],
+["Solo Leveling","Action","1E6FjKpTju8Ebn_ZYTMRWn2v2tiPRwISy"],
+["Bocchi The Rock","Music","1UrXKPeQRzfdNq2frisCvJpNiyfID-Z0L"],
+["Ranking of Kings","Fantasy","18OSebiverxEX2E4nhYL8oVh1vQxON0ep"],
+["Kotaro Lives Alone S01","Slice of life","1dmY5K4mt05obiaR16JvW6BskMpvS3XBQ"],
+["Lookism","Action","1qYz8HXhYOwR-TOWgN4E4yKAbgoqI8kUS"],
+["Danganronpa","Mystery","1rEGjDXtZdvPoV_c7baKoLolOHlqIc_DM"],
+["Oshi No Ko","Drama","1OSlbwgzeF6aoZJg6StUqx5zYQ8rs58md"],
+["Toradora!","Romance","1Ba8MoT1-pgIhFl9dQNHn5XFTgL3df7bH"],
+["One-Punch Man","Action","1yGjMeMX0_1vUHa6XbpszYGe5yLqYLKRc"],
+["Chainsaw Man","Action","14ES_2SDXFRV6n1FU880Hk8en7BMkOC_3"],
+["Ace Attorney","Mystery","1oiTD4MSCwf8IEJdNk-mJGq_NZ5xRMkA1"],
+["Delicious in the Dungeon","Fantasy","1FVt8jm0gc8A7HhXyv-Hp4U3vPSe1pzI5"],
+["Frieren: Beyond Journey's End","Fantasy","1wMmHMMK4ca9V0Ii7vvod_TqH-PP-OVcn"],
+["Kaiju No. 8","Action","1rueOefi9j5lIGRNECaeQEDGQJEWwSeeA"],
+["Call of the Night","Supernatural","1jWrHSjV3SOzhyR9uIV919ymKBhgRBQBz"],
+["Demon Slayer","Action","1DBx645dx8kca0OcSp5U1RqSo7EPjnZF4"],
+["Umamusume: Pretty Derby","Sports","1nh8JkB-LgoQGHQxLt6X2G7gQAcuWc2bL"],
+["My Hero Academia","Action","1gepZkTNEQ7wo5cxNlv8Z8V-fSB2LYV4O"],
+["The Apothecary Diaries","Drama","15GpR6FxxRct0LbVVXcauTDMDN9J5Dso9"],
+["Spy x Family S1/S2 + Movie","Comedy","1U_buKadood-g8ny8z4BcefYrybY0AsS5"],
+["The Girl I Like Forgot Her Glasses","Romance","1BXWIX-a4kdNgr4VGHUA5xdTzF9x5mqe2"],
+["I Want to Eat Your Pancreas","Movie","1Xt7ZbY1LLlFLCWVKd4cYs6pdG-PG3lft"],
+["Invincible Series Complete","Other","1xewFLZCNhjF5DtQDM5VxDic7ClprMjal"],
+["Avatar: The Last Airbender","Other","1OFWN8hASAuNWSn9mK2gANJ0PSQhvIA2r"],
+["The Boondocks","Other","1ujarzaX_90FGOiRC15OmXOAgwSbdI_kA"],
+["Skeleton Knight in Another World S1","Fantasy","19EHfXk32nwf9AFvyedtFouu1n_aQAaBm"],
+["Afro Samurai","Action","1enWphPUwgRPYnGj2TD7XVNrG8HCc3CDm"],
+["Tokyo Ghoul","Supernatural","1_62VQpKyYsI5vrDbZ2qUgJFAAkNwAum4"],
+["Fullmetal Alchemist: Brotherhood","Fantasy","1UxoXY76-yRepcoCoTln92B38CuQZWAnV"],
+["Fire Force","Action","15jlOtLcM7coy845cTkvX7wNy-5fteGlK"],
+["The Fragrant Flower Blooms with Dignity","Romance","1Mt3Iw_qKY7XlyoR_tdEFJpOqA2YrjpTE"],
+["Gachiakuta","Action","1p4FuJnTMLD1PFAnJpb8d6dUTAeVZp0wO"],
+["Your Lie in April","Drama","1XyNlzl-zjj5v6E7VFMqcfw66XQkLIxW_"],
+["Yu Yu Hakusho","Action","1aTSsJ5Ex1g2Hraq7eJ7tUWu1yz77SYRb"],
+["Hell's Paradise S01","Action","1pZKT0MMp30JToJKbxWrO6-h2DGwIgm95"],
+["BOX 1","Other","13CTeq6jZERBlf9qR4hgFHfdIRkuq_ZAK"],
+["Medalist","Sports","1W84BZFtNYHWdNcR0mb9k4UbafpHQeF3t"],
+["One Piece","Adventure","1VdoAVMV9ojCefzkVMsXB3ms5TCEcgxoC"],
+["Cyberpunk: Edgerunners","Sci-fi","1q7Y8JBLsCyqVIvmq2Zi93tSPebobgPwA"],
+["Pokémon Series Complete","Adventure","1I7-ZUInlg9jb4R6LGq0qX3n7bjGKPFFO"],
+["Dragon Ball Super","Action","1pugHirc7v54UfHpHDUr_HN3Ux3wQYSnS"],
+["JoJo's Bizarre Adventure","Action","1923Vg-QJchH2RdSseJ4n6uzUyy7X7PZQ"],
+["Maou no Musume wa Yasashi Sugiru","Fantasy","1AlArdb_vP6m1EEN_qPrDtqqBLc7SfLIs"],
+["Ghost Stories","Comedy","1L9gEnozI-rdgqN6oox-u-CHRKEoX5R0g"],
+["Otome Kaijuu Carameliser","Romance","1CyTSYSDu9rm-yMDBbBdMRDenqazhMGfa"],
+["Takopii no Genzai","Drama","1rqEcWarxf3STbI8lS1y5epNgcp8R5NI6"],
+["The Eminence in Shadow","Fantasy","12C02kC3AFQN2Y3E1aBHEWxJNmB5aGn_E"],
+["The Quintessential Quintuplets S1-S2 + Extras","Romance","1f6EmeoRZBW_DQzwITewEbV809Of2fIrW"],
+["Erased (2016)","Mystery","1XsBCdB-ipk-o6XgsB9FQPh62p8g2xsS2"],
+["Chillin' in Another World with Level 2 Super Cheat Powers","Fantasy","1dbgdZh4rOVa2jzrHqwpd9g_RD2QXqpGk"],
+["Studio Ghibli / Hayao Miyazaki Collection","Movie","14cbfwCNnGSPhvjQCl-T7fLTmgwserZoN"],
+["Vinland Saga S1","Action","1dng_-kn0r0tMIzH_P_K4SBbTy7W924MG"],
+["Vinland Saga S2","Action","1dkMhLVzHc_ovKJJw_N3d9T9DE5iFJeQn"],
+["Hajime no Ippo S1","Sports","1LMTt7FupplMrBsKhivRqnGMh0sft1dNK"],
+["Attack on Titan S1-S4","Action","1WUWO12Vnws_H4yhSIKn_I1PY3W0j7NbB"],
+["Dan Da Dan S1","Supernatural","1GQpVp-ybNpyATflF_8JYxb0jQb7QvoSv"],
+["Dan Da Dan S2","Supernatural","15vy-gWZQL3HukQcDhEqL5Z0Y5Ukxriod"],
+["Blue Lock S1","Sports","1L_4PmRvkuqYsvLQSzMuaqRVDQg2pb9Z6"],
+["Blue Lock S2","Sports","1tiOqaE_U0hF_YyK2BQR3CoY0vuY4EdGK"],
+["Jujutsu Kaisen S1-S3 collection","Action","1eqNcKK02wEdRV7RnfrmDRZf2s2QZHUyj"],
+["Jujutsu Kaisen Blu-ray collection","Action","1lmIscx6XBfjjD5INeEg3Vq7oLoQc5tYN"],
+["Jujutsu Kaisen S2","Action","1M-74s0lM8qP3o8cwcjqe2kbvSv4okdJa"],
+["Jujutsu Kaisen S3","Action","1FFxjGAK0CFFwVYMbublfCpNMpypsh6eJ"],
+["The Seven Deadly Sins S1","Fantasy","19VyCDmAZa7qJgZM3RhTMXVwIszffVVeU"],
+["The Seven Deadly Sins S3","Fantasy","11gb1DUIomX7TWVXGyoeAC9wFx3-xNbug"],
+["The Seven Deadly Sins S4","Fantasy","12FtQ_w_gu2TtB6cRDNnF64WPNC_HxuX1"],
+["Komi Can't Communicate S1","Romance","1VsPKRjlrawm0bdv-1Snstp0PTtcxi_3U"],
+["Komi Can't Communicate S2","Romance","1SgZ_eimnMG9lWM7IJTOmpZeFGHYYmLPn"],
+["Saiki K S1","Comedy","1dfTRiMicKo4bGNf7RAHIHFktwym1t-6h"],
+["Saiki K S2","Comedy","1Mnc3TvdXAeGUcVW_4N79nBnw2bwv3zaE"],
+["Blue Box 1","Romance","1BbWwaYhf5x408UN0XVgy8bq9KkVxKZLq"],
+["Blue Box 2","Romance","178reyEzawfknpkKERWe1kV8WVD05cF1T"],
+["Re:ZERO S1","Fantasy","1keqrSRLkb-KF2LV2awFUbr0Ja4yU81qV"],
+["Re:ZERO S2","Fantasy","1C6Cjk-UCBJfULfnntT82q0M4v9vkN2qg"],
+["Re:ZERO S3","Fantasy","1gr47CUadAHTjj5kb1Rt2N9IWTJ7Qd5GB"]
+];
+const colors=["linear-gradient(135deg,#ffb0cc,#b6a0ff)","linear-gradient(135deg,#9ce6e5,#91a7f8)","linear-gradient(135deg,#ffd99a,#ff9ebc)","linear-gradient(135deg,#b9a6ff,#f4a9d0)","linear-gradient(135deg,#a4d9b6,#a6b8ff)"];
+const filters=["All","Action","Adventure","Comedy","Drama","Fantasy","Movie","Mystery","Music","Other","Romance","Sci-fi","Slice of life","Sports","Supernatural","Thriller"];
+let active="All",query="";
+const grid=document.getElementById("grid"),empty=document.getElementById("empty"),filterBox=document.getElementById("filters");
+document.getElementById("totalCount").textContent=titles.length;
+filters.forEach(f=>{const b=document.createElement("button");b.className="filter"+(f==="All"?" active":"");b.textContent=f;b.addEventListener("click",()=>{active=f;document.querySelectorAll(".filter").forEach(x=>x.classList.toggle("active",x===b));render()});filterBox.appendChild(b)});
+function render(){grid.innerHTML="";const found=titles.filter(t=>(active==="All"||t[1]===active)&&(t[0].toLowerCase().includes(query)));found.forEach((t,i)=>{const [name,genre,id]=t;const card=document.createElement("article");card.className="card";card.style.setProperty("--glow",colors[i%colors.length].includes("#ff")?"#ff9dc5":"#a99cff");const letter=name.replace(/[^a-z0-9]/gi,"").slice(0,2).toUpperCase();const url="https://drive.google.com/drive/folders/"+id;card.innerHTML='<div class="card-top"><div class="poster" style="--poster:'+colors[i%colors.length]+'">'+letter+'</div><span class="tag">'+genre+'</span></div><h3></h3><div class="meta">Google Drive folder · external link</div><div class="card-bottom"><a class="open" target="_blank" rel="noopener noreferrer">Open folder <span>↗</span></a><button class="save" aria-label="Save favorite" title="Save favorite">♡</button></div>';card.querySelector("h3").textContent=name;card.querySelector(".open").href=url;const save=card.querySelector(".save");const key="moonflower-fav-"+id;let saved=false;try{saved=localStorage.getItem(key)==="1"}catch(e){}save.classList.toggle("saved",saved);save.textContent=saved?"♥":"♡";save.addEventListener("click",()=>{saved=!saved;save.classList.toggle("saved",saved);save.textContent=saved?"♥":"♡";try{localStorage.setItem(key,saved?"1":"0")}catch(e){}showToast(saved?"Added to favorites":"Removed from favorites")});grid.appendChild(card)});empty.style.display=found.length?"none":"block"}
+function showToast(s){const el=document.getElementById("toast");el.textContent=s;el.classList.add("show");clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>el.classList.remove("show"),1700)}
+document.getElementById("search").addEventListener("input",e=>{query=e.target.value.trim().toLowerCase();render()});
+render();
+</script>
+</body>
+</html>
